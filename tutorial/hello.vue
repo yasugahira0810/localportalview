@@ -7,11 +7,12 @@
 
 <script>
 export default {
-    data() {
-        return { msg: 'Hello!' }
+    data () {
+        return { msg: 'こんにちは！' }
     }
 }
 </script>
+
 <style>
 .message { color: #42b983; }
 </style>
