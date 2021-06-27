@@ -1,0 +1,24 @@
+{
+  "name": "vuelocalportal",
+  "version": "1.0.0",
+  "description": "localportal implement in vue.js",
+  "main": "index.js",
+  "dependencies": {
+    "@vue/compiler-sfc": "^3.1.2",
+    "vue": "^3.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yasugahira0810/vuelocalportal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yasugahira0810/vuelocalportal/issues"
+  },
+  "homepage": "https://github.com/yasugahira0810/vuelocalportal#readme"
+}
