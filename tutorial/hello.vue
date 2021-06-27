@@ -1,15 +1,16 @@
 <template>
-    <p class="message">メッセージ: {{ msg }}</p>
+  <div>
+    <input v-model="message"/>
+    <p> {{ message }} </p>
+  </div>
 </template>
 
 <script>
 export default {
-    data () {
-        return { msg: 'こんにちは！' }
+  data() {
+    return {
+      message: 'Hello!',
     }
+  },
 }
 </script>
-
-<style>
-.message { color: #42b983; }
-</style>
