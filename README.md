@@ -1,2 +1,2 @@
 # vuelocalportal
-localportal implement in vue
+localportal implement in vue.js
