@@ -1,8 +1,5 @@
 <template>
-  <div>
-    <input v-model="msg"/>
     <p class="message">メッセージ: {{ msg }}</p>
-  </div>
 </template>
 
 <script>

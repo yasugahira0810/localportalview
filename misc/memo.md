@@ -191,6 +191,3 @@ Did you mean npm run serve?
 ### 動作確認
 
 ![20210627_01](images/20210627_01.png)
-
-Developer toolのconsoleで`console.log(__VUE_HOT_MAP__)`とすれば変数の状態が見れる。	
-
