@@ -1,12 +1,14 @@
 <template>
   <div>
-    <input v-model="msg"/>
-    <p class="message">メッセージ: {{ msg }}</p>
-    <input v-model="url"/>
-    <p class="url">URL: {{ url }}</p>
+    <input v-model="newUrl"/>
+    <button @click="addUrl">Submit</button>
+    <h2>localportalview</h2>
+    <div v-for="(url, index) in urls" :key='index'>
     <p>
-      <button @click="persist">Save</button>
+      <span class="url">{{ url }}</span>
+      <button @click="removeUrl(index)">Remove</button>
     </p>
+    </div>
   </div>
 </template>
 
@@ -14,28 +16,42 @@
 export default {
     data () {
         return {
-    msg: 'こんにちは！',
-    url: 0
+    urls: [],
+    newUrl: null
         }
   },
   mounted() {
-    if (localStorage.msg) {
-      this.msg = localStorage.msg;
-    }
-    if (localStorage.url) {   
-      this.url = localStorage.url;
+    if (localStorage.getItem('urls')) {
+      try {
+        this.urls = JSON.parse(localStorage.getItem('urls'));
+        console.log(this.urls)
+      } catch(e) {
+        localStorage.removeItem('urls');
+      }
     }
   },
   methods: {
-    persist() {
-      localStorage.msg = this.msg;
-      localStorage.url = this.url;
-      console.log('now pretend I did more stuff...');
+    addUrl() {
+      if (!this.newUrl) {
+        return;
+      }
+
+      this.urls.push(this.newUrl);
+      this.newUrl = '';
+      this.saveUrls();
+    },
+    removeUrl(x) {
+      this.urls.splice(x, 1);
+      this.saveUrls();
+    },
+    saveUrls() {
+      const parsed = JSON.stringify(this.urls);
+      localStorage.setItem('urls', parsed);
     }
   }
 }
 </script>
 
 <style>
-.message { color: #42b983; }
+.url { color: #42b983; }
 </style>
