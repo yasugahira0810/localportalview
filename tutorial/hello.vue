@@ -1,14 +1,17 @@
 <template>
   <div>
-    <input v-model="newUrl"/>
-    <button @click="addUrl">Submit</button>
+    名前：<input v-model="newItemName"/>
+    URL：<input v-model="newItemUrl"/>
+    タグ：<input v-model="newItemTag"/>
+    <button @click="addItem">Submit</button>
     <h2>localportalview</h2>
-    <div v-for="(url, index) in urls" :key='index'>
+    <div v-for="(item, index) in items" :key=index>
     <p>
-      <span class="url">{{ url }}</span>
-      <button @click="removeUrl(index)">Remove</button>
+      <span class="item">{{ item }}</span>
+      <button @click="removeItem(index)">Remove</button>
     </p>
     </div>
+    <p> {{ items }}</p>
   </div>
 </template>
 
@@ -16,42 +19,48 @@
 export default {
     data () {
         return {
-    urls: [],
-    newUrl: null
+    items: [
+      { name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル'}
+    ],
+    newItemName: null,
+    newItemUrl: null,
+    newItemTag: null,
         }
   },
   mounted() {
-    if (localStorage.getItem('urls')) {
+    if (localStorage.getItem('items')) {
       try {
-        this.urls = JSON.parse(localStorage.getItem('urls'));
-        console.log(this.urls)
+        this.items = JSON.parse(localStorage.getItem('items'));
+        console.log(this.items)
       } catch(e) {
-        localStorage.removeItem('urls');
+        localStorage.removeItem('items');
       }
     }
   },
   methods: {
-    addUrl() {
-      if (!this.newUrl) {
+    addItem() {
+      if (!this.newItemName || !this.newItemUrl || !this.newItemTag) {
         return;
       }
 
-      this.urls.push(this.newUrl);
-      this.newUrl = '';
-      this.saveUrls();
+      this.items.push({name: this.newItemName, url: this.newItemUrl, tag: this.newItemTag});
+      this.newItemName = '';
+      this.newItemUrl = '';
+      this.newItemTag = '';
+      this.saveItems();
     },
-    removeUrl(x) {
-      this.urls.splice(x, 1);
-      this.saveUrls();
+    removeItem(x) {
+      this.items.splice(x, 1);
+      this.saveItems();
     },
-    saveUrls() {
-      const parsed = JSON.stringify(this.urls);
-      localStorage.setItem('urls', parsed);
+    saveItems() {
+      const parsed = JSON.stringify(this.items);
+      localStorage.setItem('items', parsed);
     }
   }
 }
 </script>
 
 <style>
-.url { color: #42b983; }
+.item { color: #42b983; }
 </style>
