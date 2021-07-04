@@ -11,7 +11,7 @@
       <button @click="removeItem(index)">Remove</button>
     </p>
     </div>
-    <p> {{ items }}</p>
+    <pre> {{ items | pretty }}</pre>
   </div>
 </template>
 
@@ -26,6 +26,11 @@ export default {
     newItemUrl: null,
     newItemTag: null,
         }
+  },
+  filters: {
+    pretty: function(value) {
+      return JSON.stringify(value, null, 2);
+    }
   },
   mounted() {
     if (localStorage.getItem('items')) {
