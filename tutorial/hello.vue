@@ -5,12 +5,26 @@
     タグ：<input v-model="newItemTag"/>
     <button @click="addItem">Submit</button>
     <h2>localportalview</h2>
-    <div v-for="(item, index) in items" :key=index>
-    <p>
-      <span class="item">{{ item }}</span>
-      <button @click="removeItem(index)">Remove</button>
-    </p>
-    </div>
+    <table class="item">
+    <thead>
+    <tr>
+      <th>No.</th>
+      <th>名前</th>
+      <th>URL</th>
+      <th>タグ</th>
+      <th>削除ボタン</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(item, index) in items" :key=index>
+    <td>{{ index + 1 }}</td>    
+    <td>{{ item.name }}</td>
+    <td>{{ item.url }}</td>
+    <td>{{ item.tag }}</td>
+    <td><button @click="removeItem(index)">Remove</button></td>
+    </tr>
+    </tbody>
+    </table>
     <pre> {{ items | pretty }}</pre>
   </div>
 </template>
@@ -22,6 +36,7 @@ export default {
     items: [
       { name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル'}
     ],
+    index: "",
     newItemName: null,
     newItemUrl: null,
     newItemTag: null,
