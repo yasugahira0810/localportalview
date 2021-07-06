@@ -5,34 +5,47 @@
         <input v-model="newItemTag" />
         <button @click="addItem">Submit</button>
         <h2>localportalview</h2>
-        <table class="item">
-            <thead>
-                <tr>
-                    <th>No.</th>
-                    <th>名前</th>
-                    <th>URL</th>
-                    <th>タグ</th>
-                    <th>削除ボタン</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="(item, index) in items" :key=index>
-                    <td>{{ index + 1 }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.url }}</td>
-                    <td>{{ item.tag }}</td>
-                    <td><button @click="removeItem(index)">Remove</button></td>
-                </tr>
-            </tbody>
-        </table>
-        <pre> {{ items | pretty }}</pre>
+        <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
+            <template slot="table-row" slot-scope="props">
+                  <span v-if="props.column.field == 'delete'">
+                    <button @click="removeItem(props.row.originalIndex)">Delete</button>
+                  </span>
+                  <span v-else>
+                    {{props.formattedRow[props.column.field]}}
+                  </span>
+</template>
+    
+  </vue-good-table>
+
+            <pre> {{ items | pretty }}</pre>
     </div>
 </template>
 
 <script>
+// import the styles
+import 'vue-good-table/dist/vue-good-table.css'
+import { VueGoodTable } from 'vue-good-table';
+
 export default {
     data() {
         return {
+            columns: [{
+                    label: '名前',
+                    field: 'name',
+                },
+                {
+                    label: 'URL',
+                    field: 'url',
+                },
+                {
+                    label: 'タグ',
+                    field: 'tag',
+                },
+                {
+                    label: '削除',
+                    field: 'delete'
+                }
+            ],
             items: [
                 { name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' }
             ],
@@ -41,6 +54,10 @@ export default {
             newItemUrl: null,
             newItemTag: null,
         }
+    },
+    // add to component
+    components: {
+        VueGoodTable,
     },
     filters: {
         pretty: function(value) {
