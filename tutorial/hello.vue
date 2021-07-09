@@ -4,7 +4,7 @@
         <input v-model="newItemUrl" /> タグ：
         <input v-model="newItemTag" />
         <button @click="addItem">Submit</button>
-        <button @click="truncateItems">Truncate</button>
+        <button @click="initializeItems">Initialize</button>
         <h2>localportalview</h2>
         <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
             <template slot="table-row" slot-scope="props">
@@ -110,9 +110,10 @@ export default {
             this.saveItems();
             this.isEditable = false;
         },
-        truncateItems() {
+        initializeItems() {
             this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' },
-                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue' }
+                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue' },
+                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue'}
             ];
             this.saveItems();
         },
