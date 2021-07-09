@@ -7,12 +7,15 @@
         <h2>localportalview</h2>
         <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
             <template slot="table-row" slot-scope="props">
-                      <span v-if="props.column.field == 'delete'">
-                        <button @click="removeItem(props.row.originalIndex)">Delete</button>
-                      </span>
-                      <span v-else>
-                        {{props.formattedRow[props.column.field]}}
-                      </span>
+                  <span v-if="props.column.field == 'click'">
+                            <button @click="jumpToUrl(props.row.url)">Click</button>
+                          </span>
+                          <span v-else-if="props.column.field == 'delete'">
+                            <button @click="removeItem(props.row.originalIndex)">Delete</button>
+                          </span>
+                          <span v-else>
+                            {{props.formattedRow[props.column.field]}}
+                          </span>
 </template>
     
   </vue-good-table>
@@ -30,6 +33,10 @@ export default {
     data() {
         return {
             columns: [{
+                    label: 'リンク',
+                    field: 'click'
+                },
+                {
                     label: '名前',
                     field: 'name',
                 },
@@ -97,6 +104,9 @@ export default {
         saveItems() {
             const parsed = JSON.stringify(this.items);
             localStorage.setItem('items', parsed);
+        },
+        jumpToUrl(x) {
+            window.open(x, '_blank');
         }
     }
 }
