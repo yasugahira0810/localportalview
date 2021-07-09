@@ -4,24 +4,24 @@
         <input v-model="newItemUrl" /> タグ：
         <input v-model="newItemTag" />
         <button @click="addItem">Submit</button>
+        <button @click="truncateItems">Truncate</button>
         <h2>localportalview</h2>
         <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
             <template slot="table-row" slot-scope="props">
-                  <span v-if="props.column.field == 'click'">
-                            <button @click="jumpToUrl(props.row.url)">Click</button>
-                          </span>
-                          <span v-else-if="props.column.field == 'delete'">
-                            <button @click="removeItem(props.row.originalIndex)">Delete</button>
-                          </span>
-                          <span v-else>
-                            {{props.formattedRow[props.column.field]}}
-                          </span>
+                <span v-if="props.column.field == 'click'">
+                                                      <button @click="jumpToUrl(props.row.url)">Click</button>
+                                                    </span>
+                <span v-else-if="props.column.field == 'delete'">
+                                                      <button @click="removeItem(props.row.originalIndex)">Delete</button>
+                                                    </span>
+                <span v-else>
+                                                      <div v-if="!isEditable" v-on:dblclick="isEditable = true">{{ props.formattedRow[props.column.field] }}</div>
+                                                      <div v-else><input type="text" v-model="props.formattedRow[props.column.field]" v-on:blur="updateItem(props)"></div>
+                                                    </span>
 </template>
-    
-  </vue-good-table>
-
-            <pre> {{ items | pretty }}</pre>
-    </div>
+    </vue-good-table>
+    <pre> {{ items | pretty }}</pre>
+  </div>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
         return {
             columns: [{
                     label: 'リンク',
-                    field: 'click'
+                    field: 'click',
                 },
                 {
                     label: '名前',
@@ -57,13 +57,13 @@ export default {
                     field: 'delete'
                 }
             ],
-            items: [
-                { name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' }
-            ],
+            items: [],
             index: "",
+
             newItemName: null,
             newItemUrl: null,
             newItemTag: null,
+            isEditable: false,
         }
     },
     // add to component
@@ -97,17 +97,28 @@ export default {
             this.newItemTag = '';
             this.saveItems();
         },
-        removeItem(x) {
-            this.items.splice(x, 1);
+        removeItem(index) {
+            this.items.splice(index, 1);
             this.saveItems();
         },
         saveItems() {
             const parsed = JSON.stringify(this.items);
             localStorage.setItem('items', parsed);
         },
-        jumpToUrl(x) {
-            window.open(x, '_blank');
-        }
+        updateItem(editItem) {
+            this.items.splice(editItem.row.originalIndex, 1, editItem.formattedRow);
+            this.saveItems();
+            this.isEditable = false;
+        },
+        truncateItems() {
+            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' },
+                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue' }
+            ];
+            this.saveItems();
+        },
+        jumpToUrl(url) {
+            window.open(url, '_blank');
+        },
     }
 }
 </script>
