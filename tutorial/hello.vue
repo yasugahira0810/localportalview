@@ -7,12 +7,12 @@
         <h2>localportalview</h2>
         <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
             <template slot="table-row" slot-scope="props">
-                  <span v-if="props.column.field == 'delete'">
-                    <button @click="removeItem(props.row.originalIndex)">Delete</button>
-                  </span>
-                  <span v-else>
-                    {{props.formattedRow[props.column.field]}}
-                  </span>
+                      <span v-if="props.column.field == 'delete'">
+                        <button @click="removeItem(props.row.originalIndex)">Delete</button>
+                      </span>
+                      <span v-else>
+                        {{props.formattedRow[props.column.field]}}
+                      </span>
 </template>
     
   </vue-good-table>
@@ -40,6 +40,10 @@ export default {
                 {
                     label: 'タグ',
                     field: 'tag',
+                    filterOptions: {
+                        enabled: true, // enable filter for this column
+                        placeholder: '🔍　絞り込み検索'
+                    },
                 },
                 {
                     label: '削除',
