@@ -1,24 +1,7 @@
-# localportalview
+# 俺のブックマーク
 
-## Project setup
-```
-npm install
-```
+## 特徴
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- タグを設定して検索できる
+- 既存のデータに対するパスの変更やタグの追加をダブルクリックでできる
+- ブラウザにデータを保存するだけなので、保存した情報はインターネットに出ていかない
