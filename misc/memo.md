@@ -191,3 +191,11 @@ Did you mean npm run serve?
 ### 動作確認
 
 ![20210627_01](images/20210627_01.png)
+
+# tutorial配下からの移行
+
+お試しのつもりでtutorial配下のhello.vueで開発していたが、これを最初のバージョンにしていい気がしてきたので、  
+localportalview配下に格上げ。  
+移行する前は書籍に従って`vue serve hello.vue --open`で起動していたが、移行して綺麗にする中で、  
+tutorial/hello.vueの内容をsrc/App.vueにして、vue-good-tableの依存性をpackage.jsonに記載すると、  
+`npm run serve`で起動できるようになった。

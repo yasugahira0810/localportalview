@@ -1,25 +1,43 @@
 {
-  "name": "vuelocalportal",
-  "version": "1.0.0",
-  "description": "localportal implement in vue.js",
-  "main": "index.js",
+  "name": "localportalview",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
   "dependencies": {
-    "@vue/compiler-sfc": "^3.1.2",
-    "vue": "^3.1.2",
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11",
     "vue-good-table": "^2.21.10"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "vue-template-compiler": "^2.6.11"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yasugahira0810/vuelocalportal.git"
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yasugahira0810/vuelocalportal/issues"
-  },
-  "homepage": "https://github.com/yasugahira0810/vuelocalportal#readme"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
