@@ -1,27 +1,29 @@
 <template>
     <div>
+        <h2>localportalview</h2>
         名前：<input v-model="newItemName" /> URL：
         <input v-model="newItemUrl" /> タグ：
         <input v-model="newItemTag" />
-        <button @click="addItem">Submit</button>
-        <button @click="initializeItems">Initialize</button>
-        <h2>localportalview</h2>
+        <button @click="addItem">Submit</button><br> インポート：
+        <input v-model="itemsArray" />
+        <button @click="importItems">Import</button>
         <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'click'">
-                                                      <button @click="jumpToUrl(props.row.url)">Click</button>
+                                                        <button @click="jumpToUrl(props.row.url)">Click</button>
                                                     </span>
                 <span v-else-if="props.column.field == 'delete'">
-                                                      <button @click="removeItem(props.row.originalIndex)">Delete</button>
+                                                        <button @click="removeItem(props.row.originalIndex)">Delete</button>
                                                     </span>
                 <span v-else>
-                                                      <div v-if="!isEditable" v-on:dblclick="isEditable = true">{{ props.formattedRow[props.column.field] }}</div>
-                                                      <div v-else><input type="text" v-model="props.formattedRow[props.column.field]" v-on:blur="updateItem(props)"></div>
+                                                        <div v-if="!isEditable" v-on:dblclick="isEditable = true">{{ props.formattedRow[props.column.field] }}</div>
+                                                        <div v-else><input type="text" v-model="props.formattedRow[props.column.field]" v-on:blur="updateItem(props)"></div>
                                                     </span>
-</template>
-    </vue-good-table>
-    <pre> {{ items | pretty }}</pre>
-  </div>
+            </template>
+        </vue-good-table>
+        <pre> {{ items | pretty }}</pre>
+        <button @click="initializeItems">Initialize</button>
+    </div>  
 </template>
 
 <script>
@@ -64,6 +66,7 @@ export default {
             newItemUrl: null,
             newItemTag: null,
             isEditable: false,
+            itemsArray: [],
         }
     },
     // add to component
@@ -113,13 +116,17 @@ export default {
         initializeItems() {
             this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' },
                 { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue' },
-                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue'}
+                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue' }
             ];
             this.saveItems();
         },
         jumpToUrl(url) {
             window.open(url, '_blank');
         },
+        importItems() {
+            this.items = this.items.concat(JSON.parse(this.itemsArray));
+            this.saveItems();
+        }
     }
 }
 </script>
