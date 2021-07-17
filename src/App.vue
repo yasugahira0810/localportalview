@@ -1,13 +1,12 @@
 <template>
     <div>
-        <h2>localportalview</h2>
+        <h2>俺のブックマーク</h2>
         名前：<input v-model="newItemName" /> URL：
         <input v-model="newItemUrl" /> タグ：
         <input v-model="newItemTag" />
-        <button @click="addItem">Submit</button><br> インポート：
-        <input v-model="itemsArray" />
-        <button @click="importItems">Import</button>
-        <vue-good-table :columns="columns" :rows="items" :line-numbers="true">
+        <button @click="addItem">Submit</button>
+        <vue-good-table :columns="columns" :rows="items" :line-numbers="true" :search-options="{
+    enabled: true,placeholder: '絞り込み検索'}">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'click'">
                                                         <button @click="jumpToUrl(props.row.url)">Click</button>
@@ -22,6 +21,8 @@
             </template>
         </vue-good-table>
         <pre> {{ items | pretty }}</pre>
+        インポート：<input v-model="itemsArray" />        
+        <button @click="importItems">Import</button><br>
         <button @click="initializeItems">Initialize</button>
     </div>  
 </template>
@@ -49,10 +50,6 @@ export default {
                 {
                     label: 'タグ',
                     field: 'tag',
-                    filterOptions: {
-                        enabled: true, // enable filter for this column
-                        placeholder: '🔍　絞り込み検索'
-                    },
                 },
                 {
                     label: '削除',
@@ -125,6 +122,7 @@ export default {
         },
         importItems() {
             this.items = this.items.concat(JSON.parse(this.itemsArray));
+            this.itemsArray = '';
             this.saveItems();
         }
     }
