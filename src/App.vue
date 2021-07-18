@@ -52,6 +52,10 @@ export default {
                     field: 'tag',
                 },
                 {
+                    label: '登録日時',
+                    field: 'recordDate',
+                },
+                {
                     label: '削除',
                     field: 'delete'
                 }
@@ -62,6 +66,7 @@ export default {
             newItemName: null,
             newItemUrl: null,
             newItemTag: null,
+            newItemRecordDate: null,
             isEditable: false,
             itemsArray: [],
         }
@@ -91,10 +96,13 @@ export default {
                 return;
             }
 
-            this.items.push({ name: this.newItemName, url: this.newItemUrl, tag: this.newItemTag });
+            this.newItemRecordDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
+
+            this.items.push({ name: this.newItemName, url: this.newItemUrl, tag: this.newItemTag, recordDate: this.newItemRecordDate });
             this.newItemName = '';
             this.newItemUrl = '';
             this.newItemTag = '';
+            this.newItemRecordDate = '';
             this.saveItems();
         },
         removeItem(index) {
@@ -111,9 +119,9 @@ export default {
             this.isEditable = false;
         },
         initializeItems() {
-            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル' },
-                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue' },
-                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue' }
+            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) },
+                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) },
+                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) }
             ];
             this.saveItems();
         },
