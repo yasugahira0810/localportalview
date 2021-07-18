@@ -124,16 +124,22 @@ export default {
             this.isEditable = false;
         },
         initializeItems() {
-            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 },
+
+            if(window.confirm('登録データを全て削除します。よろしいですか？')){
+                            if(window.confirm('本当によろしいですか？')){
+
+                            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 },
                 { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 },
                 { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 }
             ];
             this.saveItems();
+                            }
+	}
         },
         jumpToUrl(index) {
             this.items[index].clickCount++;
             this.saveItems();
-            //window.open(this.items[index].url, '_blank');
+            window.open(this.items[index].url, '_blank');
         },
         importItems() {
             this.items = this.items.concat(JSON.parse(this.itemsArray));
