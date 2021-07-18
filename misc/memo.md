@@ -199,3 +199,14 @@ localportalview配下に格上げ。
 移行する前は書籍に従って`vue serve hello.vue --open`で起動していたが、移行して綺麗にする中で、  
 tutorial/hello.vueの内容をsrc/App.vueにして、vue-good-tableの依存性をpackage.jsonに記載すると、  
 `npm run serve`で起動できるようになった。
+
+# ファーストバージョンリリース
+
+見た目は劣化しているが、機能的にはlocalportalv0.0.7と同じ機能を実装できた気がするので、v0.1.0としてタグを切る。  
+npm run buildした結果だと、ローカルでvue.jsを動かすことができない。  
+これはindex.htmlのパスの書き方によるものらしいので、`%s;"/;";g`みたいな感じでsedで置換。
+```
+置換前：link href="/js/chunk-vendors.5aa61c95.js"
+置換後：link href="js/chunk-vendors.5aa61c95.js"
+```
+あとフォーマットはVS Codeでの設定の仕方がよくわからないので諦めて、、[ここ](https://mtp.tools/formatters/vue-formatter)でやることにした。
