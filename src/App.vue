@@ -9,7 +9,7 @@
     enabled: true,placeholder: '絞り込み検索'}">
             <template slot="table-row" slot-scope="props">
                 <span v-if="props.column.field == 'click'">
-                                                        <button @click="jumpToUrl(props.row.url)">Click</button>
+                                                        <button @click="jumpToUrl(props.row.originalIndex)">Click</button>
                                                     </span>
                 <span v-else-if="props.column.field == 'delete'">
                                                         <button @click="removeItem(props.row.originalIndex)">Delete</button>
@@ -53,7 +53,12 @@ export default {
                 },
                 {
                     label: '登録日時',
-                    field: 'recordDate',
+                    field: 'registrationDate',
+                },
+                {
+                    label: 'クリック回数',
+                    field: 'clickCount',
+                    type: 'number',
                 },
                 {
                     label: '削除',
@@ -66,7 +71,7 @@ export default {
             newItemName: null,
             newItemUrl: null,
             newItemTag: null,
-            newItemRecordDate: null,
+            newItemregistrationDate: null,
             isEditable: false,
             itemsArray: [],
         }
@@ -96,13 +101,13 @@ export default {
                 return;
             }
 
-            this.newItemRecordDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
+            this.newItemregistrationDate = new Date().toLocaleString({ timeZone: 'Asia/Tokyo' });
 
-            this.items.push({ name: this.newItemName, url: this.newItemUrl, tag: this.newItemTag, recordDate: this.newItemRecordDate });
+            this.items.push({ name: this.newItemName, url: this.newItemUrl, tag: this.newItemTag, registrationDate: this.newItemregistrationDate, clickCount: 0 });
             this.newItemName = '';
             this.newItemUrl = '';
             this.newItemTag = '';
-            this.newItemRecordDate = '';
+            this.newItemregistrationDate = '';
             this.saveItems();
         },
         removeItem(index) {
@@ -119,14 +124,16 @@ export default {
             this.isEditable = false;
         },
         initializeItems() {
-            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) },
-                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) },
-                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue', recordDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }) }
+            this.items = [{ name: 'localportal', url: 'https://yasugahira0810.github.io/localportal/#/', tag: 'ポータル', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 },
+                { name: 'vue-good-table', url: 'https://xaksis.github.io/vue-good-table/', tag: 'Vue', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 },
+                { name: '基礎からわかる、Vue.jsのテスト', url: 'https://www.codegrid.net/series/2018-vue-testing', tag: 'Vue', registrationDate: new Date().toLocaleString({ timeZone: 'Asia/Tokyo' }), clickCount: 0 }
             ];
             this.saveItems();
         },
-        jumpToUrl(url) {
-            window.open(url, '_blank');
+        jumpToUrl(index) {
+            this.items[index].clickCount++;
+            this.saveItems();
+            //window.open(this.items[index].url, '_blank');
         },
         importItems() {
             this.items = this.items.concat(JSON.parse(this.itemsArray));
