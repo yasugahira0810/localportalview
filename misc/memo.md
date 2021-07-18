@@ -209,3 +209,4 @@ npm run buildした結果だと、ローカルでvue.jsを動かすことがで�
 置換前：link href="/js/chunk-vendors.5aa61c95.js"
 置換後：link href="js/chunk-vendors.5aa61c95.js"
 ```
+あとフォーマットはVS Codeでの設定の仕方がよくわからないので諦めて、、[ここ](https://mtp.tools/formatters/vue-formatter)でやることにした。
