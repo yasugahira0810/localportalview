@@ -155,22 +155,29 @@ export default {
 							name: "localportal",
 							url: "https://yasugahira0810.github.io/localportal/#/",
 							tag: "ポータル",
-							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
-							clickCount: 0
+							registrationDate: "2021/7/18 16:42:12",
+							clickCount: 5
 						},
 						{
 							name: "vue-good-table",
 							url: "https://xaksis.github.io/vue-good-table/",
 							tag: "Vue",
-							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
-							clickCount: 0
+							registrationDate: "1990/1/1 11:11:11",
+							clickCount: 100
 						},
 						{
 							name: "基礎からわかる、Vue.jsのテスト",
 							url: "https://www.codegrid.net/series/2018-vue-testing",
-							tag: "Vue",
+							tag: "Vue, テスト",
 							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
-							clickCount: 0
+							clickCount: 20
+						},
+						{
+							name: "Vue JS Formatter",
+							url: "https://mtp.tools/formatters/vue-formatter",
+							tag: "Vue, フォーマッター",
+							registrationDate: "2000/4/4 00:00:00",
+							clickCount: 12
 						}
 					];
 					this.saveItems();
