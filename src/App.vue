@@ -13,6 +13,10 @@
 				enabled: true,
 				placeholder: '絞り込み検索'
 			}"
+			:pagination-options="{
+				enabled: true
+			}"
+			styleClass="vgt-table striped condensed bordered"
 		>
 			<template slot="table-row" slot-scope="props">
 				<span v-if="props.column.field == 'click'">
