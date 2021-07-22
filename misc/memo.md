@@ -210,3 +210,12 @@ npm run buildした結果だと、ローカルでvue.jsを動かすことがで�
 置換後：link href="js/chunk-vendors.5aa61c95.js"
 ```
 あとフォーマットはVS Codeでの設定の仕方がよくわからないので諦めて、、[ここ](https://mtp.tools/formatters/vue-formatter)でやることにした。
+
+# テスト調査
+
+- [Vue.js ユニットテストの基本まとめ](https://qiita.com/kskinaba/items/d23259060e6e13b7353c)
+  - 写経したが動かなかった
+  - GitHubのコードをクローンしてnpm install, npm testしたら動いた
+  - 動くサンプルという点で重要。記事の内容自体は見返さなくても良さそう
+- [【基本編】Jestを利用してVue コンポーネントをテストする方法(Unit Test)](https://reffect.co.jp/vue/vue-jest-test)
+  - 次はこれ読む
