@@ -250,3 +250,12 @@ found 7 moderate severity vulnerabilities
   ## Puppeteer実行
 
   [ここ]見て、`node index.js`でローカルのorenobookmarkに対して実行。画面キャプチャが取れた。データが何も入っていなかったので、次は初期化ボタンを自分で押すような処理を書く必要がありそう。Chromeですでに登録している既存のデータに対しての影響はなかった。Chromiumで実行しているからだと思う。
+
+  ## テスト作成
+
+  - 書籍だとテストフレームワークにavaを使っているが、今使うなら、jestっぽいので、jestを使う。
+  - jestのサイトにpuppeteerとの使い方も書いてあった。
+
+  ## テスト実行
+
+  - jestのサイトのpuppeteerとの使い方見て、とりあえず初期表示の自動テストはできた。
