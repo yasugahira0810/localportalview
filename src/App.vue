@@ -42,7 +42,7 @@
 		<pre> {{ items | pretty }}</pre>
 		インポート：<input v-model="itemsArray" />
 		<button @click="importItems">Import</button><br />
-		<button @click="initializeItems">Initialize</button>
+		<button @click="initializeItems" id="initialize">Initialize</button>
 	</div>
 </template>
 
