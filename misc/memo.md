@@ -259,3 +259,4 @@ found 7 moderate severity vulnerabilities
   ## テスト実行
 
   - jestのサイトのpuppeteerとの使い方見て、とりあえず初期表示の自動テストはできた。
+  - puppeteer単体の時は別ブラウザが起動していた気がするが、jestと組み合わせると、別ブラウザが立ち上がっておらず、事前にアプリを起動しておかないといけないことに気づいた。
