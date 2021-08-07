@@ -27,11 +27,8 @@
 			<button @click="removeItems()">Delete</button>
 		</div>
 			<template slot="table-row" slot-scope="props">
-				<span v-if="props.column.field == 'url'">
-					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
-						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer">{{ props.row.url }}</a>
-					</div>
-					<div v-else>
+				<span v-if="isEditable">
+					<div>
 						<input
 							type="text"
 							v-model="props.formattedRow[props.column.field]"
@@ -39,16 +36,12 @@
 						/>
 					</div>
 				</span>
-				<span v-else>
-					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
-						{{ props.formattedRow[props.column.field] }}
+				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
+					<div v-if="props.column.field == 'url'">
+						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer">{{ props.row.url }}</a>
 					</div>
 					<div v-else>
-						<input
-							type="text"
-							v-model="props.formattedRow[props.column.field]"
-							v-on:blur="updateItem(props)"
-						/>
+						{{ props.formattedRow[props.column.field] }}
 					</div>
 				</span>
 			</template>
