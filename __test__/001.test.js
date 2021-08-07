@@ -6,5 +6,5 @@ beforeAll(async () => {
 })
 
 test('001 初期表示できること（データ初期化前）', async () => {
-  await expect(page).toMatch('俺のブックマーク')
+  await expect(page).toMatch('Quick Bookmark')
 })
