@@ -6,9 +6,14 @@
 		<input v-model="newItemTag" />
 		<button @click="addItem">Submit</button>
 		<vue-good-table
+			@on-selected-rows-change="selectionChanged"
+			ref="my-table"
+			:select-options="{ 
+				enabled: true,
+				selectOnCheckboxOnly: true,
+				}"
 			:columns="columns"
 			:rows="items"
-			:line-numbers="true"
 			:search-options="{
 				enabled: true,
 				placeholder: '絞り込み検索'
@@ -18,6 +23,9 @@
 			}"
 			styleClass="vgt-table striped condensed bordered"
 		>
+		<div slot="selected-row-actions">
+			<button @click="removeItems()">Delete</button>
+		</div>
 			<template slot="table-row" slot-scope="props">
 				<span v-if="props.column.field == 'url'">
 					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
@@ -30,9 +38,6 @@
 							v-on:blur="updateItem(props)"
 						/>
 					</div>
-				</span>
-				<span v-else-if="props.column.field == 'delete'">
-					<button @click="removeItem(props.row.originalIndex)">Delete</button>
 				</span>
 				<span v-else>
 					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
@@ -84,10 +89,6 @@ export default {
 					label: "クリック回数",
 					field: "clickCount",
 					type: "number"
-				},
-				{
-					label: "削除",
-					field: "delete"
 				}
 			],
 			items: [],
@@ -142,6 +143,16 @@ export default {
 			this.newItemTag = "";
 			this.newItemregistrationDate = "";
 			this.saveItems();
+		},
+		removeItems() {
+			if (window.confirm("削除します。よろしいですか？")) {
+				// Without reverse(), originalIndex will slide from where user selected.
+				// This is caused by splice() used at removeItem().
+				this.$refs['my-table'].selectedRows.reverse()
+				for (let i in this.$refs['my-table'].selectedRows) {
+					this.removeItem(this.$refs['my-table'].selectedRows[i].originalIndex)
+				}
+			}
 		},
 		removeItem(index) {
 			this.items.splice(index, 1);
