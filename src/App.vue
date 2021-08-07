@@ -22,6 +22,18 @@
 				<span v-if="props.column.field == 'click'">
 					<button @click="jumpToUrl(props.row.originalIndex)">Click</button>
 				</span>
+				<span v-else-if="props.column.field == 'url'">
+					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
+						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer">{{ props.row.url }}</a>
+					</div>
+					<div v-else>
+						<input
+							type="text"
+							v-model="props.formattedRow[props.column.field]"
+							v-on:blur="updateItem(props)"
+						/>
+					</div>
+				</span>
 				<span v-else-if="props.column.field == 'delete'">
 					<button @click="removeItem(props.row.originalIndex)">Delete</button>
 				</span>
