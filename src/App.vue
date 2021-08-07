@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h2>俺のブックマーク</h2>
+		<h2>Quick Bookmark</h2>
 		名前：<input v-model="newItemName" /> URL：
 		<input v-model="newItemUrl" /> タグ：
 		<input v-model="newItemTag" />
@@ -19,10 +19,7 @@
 			styleClass="vgt-table striped condensed bordered"
 		>
 			<template slot="table-row" slot-scope="props">
-				<span v-if="props.column.field == 'click'">
-					<button @click="jumpToUrl(props.row.originalIndex)">Click</button>
-				</span>
-				<span v-else-if="props.column.field == 'url'">
+				<span v-if="props.column.field == 'url'">
 					<div v-if="!isEditable" v-on:dblclick="isEditable = true">
 						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer">{{ props.row.url }}</a>
 					</div>
@@ -67,10 +64,6 @@ export default {
 	data() {
 		return {
 			columns: [
-				{
-					label: "リンク",
-					field: "click"
-				},
 				{
 					label: "名前",
 					field: "name"
