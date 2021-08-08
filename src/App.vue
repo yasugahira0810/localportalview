@@ -38,7 +38,7 @@
 				</span>
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
-						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer">{{ props.row.url }}</a>
+						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer" v-on:click="jumpToUrl(props.row.originalIndex)">{{ props.row.url }}</a>
 					</div>
 					<div v-else>
 						{{ props.formattedRow[props.column.field] }}
@@ -77,6 +77,10 @@ export default {
 				{
 					label: "登録日時",
 					field: "registrationDate"
+				},
+				{
+					label: "最終アクセス日時",
+					field: "lastAccessDate"
 				},
 				{
 					label: "クリック回数",
@@ -171,6 +175,7 @@ export default {
 							url: "https://yasugahira0810.github.io/localportal/#/",
 							tag: "ポータル",
 							registrationDate: "2021/7/18 16:42:12",
+							lastAccessDate: "2021/7/20 16:42:12",
 							clickCount: 5
 						},
 						{
@@ -192,6 +197,7 @@ export default {
 							url: "https://mtp.tools/formatters/vue-formatter",
 							tag: "Vue, フォーマッター",
 							registrationDate: "2000/4/4 00:00:00",
+							lastAccessDate: "2001/5/5 00:00:00",
 							clickCount: 12
 						}
 					];
@@ -200,6 +206,7 @@ export default {
 			}
 		},
 		jumpToUrl(index) {
+			this.items[index].lastAccessDate = new Date().toLocaleString({ timeZone: "Asia/Tokyo" });
 			this.items[index].clickCount++;
 			this.saveItems();
 			window.open(this.items[index].url, "_blank");
