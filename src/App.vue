@@ -1,17 +1,14 @@
 <template>
 	<div>
-		<h2>Quick Bookmark</h2>
-		名前：<input v-model="newItemName" /> URL：
-		<input v-model="newItemUrl" /> タグ：
-		<input v-model="newItemTag" />
-		<button @click="addItem">Submit</button>
+		<h1>Quick Bookmark</h1>
+		<h2>検索用テーブル</h2>
 		<vue-good-table
 			@on-selected-rows-change="selectionChanged"
 			ref="my-table"
-			:select-options="{ 
+			:select-options="{
 				enabled: true,
-				selectOnCheckboxOnly: true,
-				}"
+				selectOnCheckboxOnly: true
+			}"
 			:columns="columns"
 			:rows="items"
 			:search-options="{
@@ -23,9 +20,9 @@
 			}"
 			styleClass="vgt-table striped condensed bordered"
 		>
-		<div slot="selected-row-actions">
-			<button @click="removeItems()">Delete</button>
-		</div>
+			<div slot="selected-row-actions">
+				<button @click="removeItems()">Delete</button>
+			</div>
 			<template slot="table-row" slot-scope="props">
 				<span v-if="isEditable">
 					<div>
@@ -38,7 +35,13 @@
 				</span>
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
-						<a v-bind:href="props.row.url" target="_blank" rel="noopener noreferrer" v-on:click="jumpToUrl(props.row.originalIndex)">{{ props.row.url }}</a>
+						<a
+							v-bind:href="props.row.url"
+							target="_blank"
+							rel="noopener noreferrer"
+							v-on:click="jumpToUrl(props.row.originalIndex)"
+							>{{ props.row.url }}</a
+						>
 					</div>
 					<div v-else>
 						{{ props.formattedRow[props.column.field] }}
@@ -46,9 +49,17 @@
 				</span>
 			</template>
 		</vue-good-table>
-		<pre> {{ items | pretty }}</pre>
-		インポート：<input v-model="itemsArray" />
+		<h2>登録用フォーム</h2>
+		名前：<input v-model="newItemName" /> URL：
+		<input v-model="newItemUrl" /> タグ：
+		<input v-model="newItemTag" />
+		<button @click="addItem">Submit</button>
+		<h2 class="Accordion-Item" @click="toggleAccordion()">登録内容表示</h2>
+		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
+		<h2>JSONインポート用フォーム</h2>
+		<input v-model="itemsArray" />
 		<button @click="importItems">Import</button><br />
+		<h2>データ初期化用フォーム</h2>
 		<button @click="initializeItems" id="initialize">Initialize</button>
 	</div>
 </template>
@@ -96,7 +107,8 @@ export default {
 			newItemTag: null,
 			newItemregistrationDate: null,
 			isEditable: false,
-			itemsArray: []
+			itemsArray: [],
+			isOpened: false
 		};
 	},
 	// add to component
@@ -122,7 +134,7 @@ export default {
 		addItem() {
 			// Validation. At least, URL is needed.
 			if (!this.newItemName || !this.newItemUrl || !this.newItemTag) {
-				window.alert("各項目を記載してください")
+				window.alert("各項目を記載してください");
 				return;
 			}
 
@@ -147,9 +159,9 @@ export default {
 			if (window.confirm("削除します。よろしいですか？")) {
 				// Without reverse(), originalIndex will slide from where user selected.
 				// This is caused by splice() used at removeItem().
-				this.$refs['my-table'].selectedRows.reverse()
-				for (let i in this.$refs['my-table'].selectedRows) {
-					this.removeItem(this.$refs['my-table'].selectedRows[i].originalIndex)
+				this.$refs["my-table"].selectedRows.reverse();
+				for (let i in this.$refs["my-table"].selectedRows) {
+					this.removeItem(this.$refs["my-table"].selectedRows[i].originalIndex);
 				}
 			}
 		},
@@ -206,7 +218,9 @@ export default {
 			}
 		},
 		jumpToUrl(index) {
-			this.items[index].lastAccessDate = new Date().toLocaleString({ timeZone: "Asia/Tokyo" });
+			this.items[index].lastAccessDate = new Date().toLocaleString({
+				timeZone: "Asia/Tokyo"
+			});
 			this.items[index].clickCount++;
 			this.saveItems();
 			window.open(this.items[index].url, "_blank");
@@ -215,6 +229,9 @@ export default {
 			this.items = this.items.concat(JSON.parse(this.itemsArray));
 			this.itemsArray = "";
 			this.saveItems();
+		},
+		toggleAccordion() {
+			this.isOpened = !this.isOpened;
 		}
 	}
 };
