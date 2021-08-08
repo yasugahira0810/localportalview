@@ -116,7 +116,9 @@ export default {
 	},
 	methods: {
 		addItem() {
+			// Validation. At least, URL is needed.
 			if (!this.newItemName || !this.newItemUrl || !this.newItemTag) {
+				window.alert("各項目を記載してください")
 				return;
 			}
 
