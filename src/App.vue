@@ -4,6 +4,7 @@
 		<h2>検索用テーブル</h2>
 		<vue-good-table
 			@on-selected-rows-change="selectionChanged"
+			@on-row-click="onRowClick"
 			ref="my-table"
 			:select-options="{
 				enabled: true,
@@ -232,6 +233,9 @@ export default {
 		},
 		toggleAccordion() {
 			this.isOpened = !this.isOpened;
+		},
+		onRowClick() {
+			this.isEditable = false;
 		}
 	}
 };
