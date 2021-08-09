@@ -24,7 +24,8 @@
 				<button @click="removeItems()">Delete</button>
 			</div>
 			<template slot="table-row" slot-scope="props">
-				<span v-if="isEditable">
+				<!-- dblclickをclickにすると、編集可能領域にカーソルを持って行った瞬間通常状態に戻ってしまう -->
+				<span v-if="isEditable" v-on:dblclick="isEditable = false">
 					<div>
 						<input
 							type="text"
@@ -176,6 +177,7 @@ export default {
 		updateItem(editItem) {
 			this.items.splice(editItem.row.originalIndex, 1, editItem.formattedRow);
 			this.saveItems();
+			// 編集後、領域外をクリックすると通常状態に戻る
 			this.isEditable = false;
 		},
 		initializeItems() {
