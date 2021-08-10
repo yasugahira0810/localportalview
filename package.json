@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "delay": "^5.0.0",
     "jest-puppeteer": "^5.0.4",
     "puppeteer": "^10.1.0",
     "vue": "^2.6.11",
