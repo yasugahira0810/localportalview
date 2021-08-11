@@ -1,5 +1,7 @@
 # Quick Bookmark
 
+[![CI](https://github.com/yasugahira0810/quickbookmark/actions/workflows/main.yml/badge.svg)](https://github.com/yasugahira0810/quickbookmark/actions/workflows/main.yml)
+
 ## 特徴
 
 - タグを設定して検索できる
