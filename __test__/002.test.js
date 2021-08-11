@@ -1,6 +1,5 @@
 // 002 リンクをクリックすると最終アクセス日時が更新され、クリック回数が1回増える
 let page;
-const delay = require('delay');
 
 beforeAll(async () => {
   page = await browser.newPage();
