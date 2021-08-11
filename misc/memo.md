@@ -247,16 +247,32 @@ found 7 moderate severity vulnerabilities
   run `npm audit fix` to fix them, or `npm audit` for details
   ```
 
-  ## Puppeteer実行
+## Puppeteer実行
 
-  [ここ]見て、`node index.js`でローカルのorenobookmarkに対して実行。画面キャプチャが取れた。データが何も入っていなかったので、次は初期化ボタンを自分で押すような処理を書く必要がありそう。Chromeですでに登録している既存のデータに対しての影響はなかった。Chromiumで実行しているからだと思う。
+[ここ]見て、`node index.js`でローカルのorenobookmarkに対して実行。画面キャプチャが取れた。データが何も入っていなかったので、次は初期化ボタンを自分で押すような処理を書く必要がありそう。Chromeですでに登録している既存のデータに対しての影響はなかった。Chromiumで実行しているからだと思う。
 
-  ## テスト作成
+## テスト作成
 
-  - 書籍だとテストフレームワークにavaを使っているが、今使うなら、jestっぽいので、jestを使う。
-  - jestのサイトにpuppeteerとの使い方も書いてあった。
+- 書籍だとテストフレームワークにavaを使っているが、今使うなら、jestっぽいので、jestを使う。
+- jestのサイトにpuppeteerとの使い方も書いてあった。
 
-  ## テスト実行
+## テスト実行
 
-  - jestのサイトのpuppeteerとの使い方見て、とりあえず初期表示の自動テストはできた。
-  - puppeteer単体の時は別ブラウザが起動していた気がするが、jestと組み合わせると、別ブラウザが立ち上がっておらず、事前にアプリを起動しておかないといけないことに気づいた。
+- jestのサイトのpuppeteerとの使い方見て、とりあえず初期表示の自動テストはできた。
+- puppeteer単体の時は別ブラウザが起動していた気がするが、jestと組み合わせると、別ブラウザが立ち上がっておらず、事前にアプリを起動しておかないといけないことに気づいた。
+
+## Puppetterメモ
+
+### querySelectorとquerySelectorAll
+以下は同じ
+```
+const tableData = await page.evaluate(() => document.querySelector('#vgt-table').innerHTML)
+const tableData = await page.evaluate(() => document.querySelectorAll('#vgt-table')[0].innerHTML)
+```
+
+### Devツールからのセレクター抽出
+
+変化に弱いが、セレクター抽出の試行錯誤が不要なのは強い
+
+1. DevツールのElementsで該当の要素をクリック
+1. 右クリック＞コピー＞Copy selectorでコピー

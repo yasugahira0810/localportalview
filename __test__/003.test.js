@@ -53,9 +53,26 @@ test('003-3 データ登録後に「Jest」で検索してヒットすること'
 
 test('003-4 データ削除後に「Jest」で検索してヒットしないこと', async () => {
 
-    // TODO: チェックボックスにチェックする
-    // TODO: Deleteボタンを押す
-    // TODO: popupにOKを押す
-    // TODO: 検索ボックスを空にする
-    // TODO: テーブルの中に「Jest/puppeteerを使用する」が含まれないことを確認する
+    // チェックボックスにチェックする
+    await page.click('#vgt-table > tbody > tr > th > input[type=checkbox]')
+
+    // Deleteボタンを押す
+    await page.click('body > div > div > div > div.vgt-selection-info-row.clearfix > div')
+
+    // popupにOKを押す
+    const pages = await browser.pages(); // get all open pages by the browser
+    const popup = pages[pages.length - 1]; // the popup should be the last page opened
+    popup.on('dialog', async dialog => {
+        dialog.accept(); // OK
+      });
+
+    // 事前準備：Jestが4文字なので、4回バックスペースキーを押して絞り込み検索をクリアする
+    await page.type('.vgt-input', "") // カーソルを絞り込み検索に持っていく
+    for (let i = 0; i < 10; i++) {
+        await page.keyboard.press('Backspace');
+        }
+
+    // テーブルの中に「Jest/puppeteerを使用する」が含まれないことを確認する
+    const tableData = await page.evaluate(() => document.querySelector('#vgt-table').innerHTML)
+    await expect(tableData).not.toContain('Jest/puppeteerを使用する')
 })
