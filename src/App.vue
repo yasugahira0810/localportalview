@@ -13,6 +13,7 @@
 			:rows="items"
 			:search-options="{
 				enabled: true,
+				searchFn: mySearchFn,
 				placeholder: '絞り込み検索'
 			}"
 			:pagination-options="{
@@ -109,7 +110,9 @@ export default {
 			newItemregistrationDate: null,
 			isEditable: false,
 			itemsArray: [],
-			isOpened: false
+			isOpened: false,
+			myfunc: "",
+			selectionChanged: ""
 		};
 	},
 	// add to component
@@ -234,6 +237,30 @@ export default {
 		},
 		toggleAccordion() {
 			this.isOpened = !this.isOpened;
+		},
+		mySearchFn(row, col, cellValue, searchTerm){
+			// mySearchFnは全セルに対して処理を実行するが無駄なので、
+			// col.labelが名前のセルのみ処理して、それ以外は処理しない
+			if ( col.label !== "名前" ) {
+				return
+			}
+			
+			// 名前とタグをくっつけて検索対象文字列を生成する
+			const targetText = row.name + ', ' + row.tag
+
+			// 検索ワードをスペースで区切って検索ワード配列を作成する
+			const searchWords = searchTerm.replaceAll("　", " ").split(" ");
+
+			// 検索ワード配列の個数分ループする
+			// 検索対象文字列に検索ワードが含まれていない場合、その列は表示しない
+			// 上記処理を検索ワード配列の先頭から末尾まで繰り返す
+			// 検索対象文字列に全ての検索ワードが含まれていた場合、その列は表示する
+			for (let i in searchWords) {
+				if ( targetText.search(searchWords[i]) === -1) {
+					return false
+				}
+			}
+			return true
 		}
 	}
 };
