@@ -229,7 +229,14 @@ export default {
 			this.items[index].clickCount++;
 			this.saveItems();
 			window.open(this.items[index].url, "_blank");
+
+			// Reset global search, because usually users search another words
+			// after once jump to a link.
+			// setTimeout(this.resetGlobalSearch, 5000);
 		},
+		// resetGlobalSearch() {
+		// 	this.$refs['my-table'].globalSearchTerm = ''
+		// },
 		importItems() {
 			this.items = this.items.concat(JSON.parse(this.itemsArray));
 			this.itemsArray = "";
@@ -246,10 +253,10 @@ export default {
 			}
 			
 			// 名前とタグをくっつけて検索対象文字列を生成する
-			const targetText = row.name + ', ' + row.tag
+			const targetText = row.name.toUpperCase() + ', ' + row.tag.toUpperCase()
 
 			// 検索ワードをスペースで区切って検索ワード配列を作成する
-			const searchWords = searchTerm.replaceAll("　", " ").split(" ");
+			const searchWords = searchTerm.toUpperCase().replaceAll("　", " ").split(" ");
 
 			// 検索ワード配列の個数分ループする
 			// 検索対象文字列に検索ワードが含まれていない場合、その列は表示しない
