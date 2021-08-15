@@ -34,7 +34,7 @@ test('003-2 登録用フォームからデータを登録できること', async
     await page.click('#addItem')
 
     // vue-good-tableの登録日時を取得
-    const afterRegistrationDate = await page.evaluate(() => document.querySelectorAll('#vgt-table > tbody > tr')[4].querySelectorAll('td > span > div')[3].innerHTML)
+    const afterRegistrationDate = await page.evaluate(() => document.querySelectorAll('#vgt-table > tbody > tr')[6].querySelectorAll('td > span > div')[3].innerHTML)
 
     // 期待値となる実行日を取得（時刻は比較対象外のため取得していない）
     var rawDate = new Date()

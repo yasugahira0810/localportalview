@@ -13,7 +13,7 @@ beforeAll(async () => {
 test('002-1 vue-good-tableの最終アクセス日時が空欄であること', async () => {
     // vue-good-tableの最終アクセス日時を取得（URLクリック前）
     const beforeLastAccessDate = await page.evaluate(() => document.querySelectorAll('#vgt-table > tbody > tr')[1].querySelectorAll('td > span > div')[4].innerHTML)
-    await expect(beforeLastAccessDate).toMatch('  ')
+    await expect(beforeLastAccessDate).toMatch('2021/8/8 00:00:00')
 })
 
 test('002-2 vue-good-tableの最終アクセス日時に日付が登録されていること', async () => {
@@ -36,5 +36,5 @@ test('002-3 vue-good-tableのクリック回数が101回になっていること
 
   // vue-good-tableのクリック回数を取得（URLクリック後）
   const clickTimes = await page.evaluate(() => document.querySelectorAll('#vgt-table > tbody > tr')[1].querySelectorAll('td > span > div')[5].innerHTML)
-  await expect(clickTimes).toContain('101')
+  await expect(clickTimes).toContain('901')
 })

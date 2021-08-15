@@ -190,32 +190,48 @@ export default {
 						{
 							name: "localportal",
 							url: "https://yasugahira0810.github.io/localportal/#/",
-							tag: "ポータル",
-							registrationDate: "2021/7/18 16:42:12",
+							tag: "ポータル, ブックマーク, Angular",
+							registrationDate: "2021/1/1 00:00:00",
 							lastAccessDate: "2021/7/20 16:42:12",
-							clickCount: 5
+							clickCount: 50000
 						},
 						{
 							name: "vue-good-table",
 							url: "https://xaksis.github.io/vue-good-table/",
 							tag: "Vue",
 							registrationDate: "1990/1/1 11:11:11",
-							clickCount: 100
+							lastAccessDate: "2021/8/8 00:00:00",
+							clickCount: 900
 						},
 						{
 							name: "基礎からわかる、Vue.jsのテスト",
 							url: "https://www.codegrid.net/series/2018-vue-testing",
 							tag: "Vue, テスト",
 							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
-							clickCount: 20
+							clickCount: 0
+						},
+						{
+							name: "Quick Bookmark",
+							url: "https://github.com/yasugahira0810/quickbookmark",
+							tag: "ポータル, ブックマーク, VUE",
+							registrationDate: "2000/4/4 00:00:00",
+							lastAccessDate: "2000/4/4 00:01:00",
+							clickCount: 100000
 						},
 						{
 							name: "Vue JS Formatter",
 							url: "https://mtp.tools/formatters/vue-formatter",
 							tag: "Vue, フォーマッター",
-							registrationDate: "2000/4/4 00:00:00",
-							lastAccessDate: "2001/5/5 00:00:00",
-							clickCount: 12
+							registrationDate: "2021/8/1 00:00:00",
+							clickCount: 0
+						},
+						{
+							name: "Vue.js ユニットテストの基本まとめ",
+							url: "https://qiita.com/kskinaba/items/d23259060e6e13b7353c",
+							tag: "",
+							registrationDate: "2020/12/31 23:59:59",
+							lastAccessDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
+							clickCount: 1
 						}
 					];
 					this.saveItems();
