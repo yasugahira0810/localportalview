@@ -228,7 +228,7 @@ export default {
 						{
 							name: "Vue.js ユニットテストの基本まとめ",
 							url: "https://qiita.com/kskinaba/items/d23259060e6e13b7353c",
-							tag: "",
+							tag: "vue, ユニットテスト, Qiita",
 							registrationDate: "2020/12/31 23:59:59",
 							lastAccessDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
 							clickCount: 1
