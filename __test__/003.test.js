@@ -1,6 +1,7 @@
 // 003 登録用フォームからデータを追加して、検索にヒットすることを確認し、削除する
 let page;
 const delay = require('delay');
+const TARGET_ROW = 6; // Jest/puppeteerを使用するの配列番号
 
 async function sleep(delay) {
     return new Promise(resolve => setTimeout(resolve, delay));
@@ -34,7 +35,7 @@ test('003-2 登録用フォームからデータを登録できること', async
     await page.click('#addItem')
 
     // vue-good-tableの登録日時を取得
-    const afterRegistrationDate = await page.evaluate(() => document.querySelectorAll('#vgt-table > tbody > tr')[6].querySelectorAll('td > span > div')[3].innerHTML)
+    const afterRegistrationDate = await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td > span > div')[3].innerHTML, TARGET_ROW)
 
     // 期待値となる実行日を取得（時刻は比較対象外のため取得していない）
     var rawDate = new Date()
