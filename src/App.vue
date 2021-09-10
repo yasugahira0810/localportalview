@@ -37,6 +37,8 @@
 				</span>
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
+						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
+						<button @click="writeToClipboard(props.row.url)">COPY</button>&nbsp;
 						<a
 							v-bind:href="props.row.url"
 							target="_blank"
@@ -56,7 +58,9 @@
 		<input name="newItemUrl" v-model="newItemUrl" /> タグ：
 		<input name="newItemTag" v-model="newItemTag" />
 		<button id="addItem" @click="addItem">Submit</button>
-		<h2 id="display-info" class="Accordion-Item" @click="toggleAccordion()">登録内容表示</h2>
+		<h2 id="display-info" class="Accordion-Item" @click="toggleAccordion()">
+			登録内容表示
+		</h2>
 		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
 		<h2 id="import-json">JSONインポート用フォーム</h2>
 		<input name="itemsArray" v-model="itemsArray" />
@@ -261,29 +265,38 @@ export default {
 		toggleAccordion() {
 			this.isOpened = !this.isOpened;
 		},
-		mySearchFn(row, col, cellValue, searchTerm){
+		mySearchFn(row, col, cellValue, searchTerm) {
 			// mySearchFnは全セルに対して処理を実行するが無駄なので、
 			// col.labelが名前のセルのみ処理して、それ以外は処理しない
-			if ( col.label !== "名前" ) {
-				return
+			if (col.label !== "名前") {
+				return;
 			}
-			
+
 			// 名前とタグをくっつけて検索対象文字列を生成する
-			const targetText = row.name.toUpperCase() + ', ' + row.tag.toUpperCase()
+			const targetText = row.name.toUpperCase() + ", " + row.tag.toUpperCase();
 
 			// 検索ワードをスペースで区切って検索ワード配列を作成する
-			const searchWords = searchTerm.toUpperCase().replaceAll("　", " ").split(" ");
+			const searchWords = searchTerm
+				.toUpperCase()
+				.replaceAll("　", " ")
+				.split(" ");
 
 			// 検索ワード配列の個数分ループする
 			// 検索対象文字列に検索ワードが含まれていない場合、その列は表示しない
 			// 上記処理を検索ワード配列の先頭から末尾まで繰り返す
 			// 検索対象文字列に全ての検索ワードが含まれていた場合、その列は表示する
 			for (let i in searchWords) {
-				if ( targetText.search(searchWords[i]) === -1) {
-					return false
+				if (targetText.search(searchWords[i]) === -1) {
+					return false;
 				}
 			}
-			return true
+			return true;
+		},
+		// COPYボタンでURLをコピーするためのメソッド
+		writeToClipboard(text) {
+			navigator.clipboard.writeText(text).catch(e => {
+				console.error(e);
+			});
 		}
 	}
 };
