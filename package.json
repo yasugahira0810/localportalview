@@ -14,7 +14,8 @@
     "jest-puppeteer": "^5.0.4",
     "puppeteer": "^10.1.0",
     "vue": "^2.6.11",
-    "vue-good-table": "^2.21.10"
+    "vue-good-table": "^2.21.10",
+    "wanakana": "^4.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
