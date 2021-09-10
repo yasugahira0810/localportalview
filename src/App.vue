@@ -74,6 +74,7 @@
 // import the styles
 import "vue-good-table/dist/vue-good-table.css";
 import { VueGoodTable } from "vue-good-table";
+import * as wanakana from 'wanakana';
 
 export default {
 	data() {
@@ -273,20 +274,29 @@ export default {
 			}
 
 			// 名前とタグをくっつけて検索対象文字列を生成する
+			// 大文字と小文字のあいまい検索のため、アルファベットは大文字にする
 			const targetText = row.name.toUpperCase() + ", " + row.tag.toUpperCase();
+			// ひらがなとカタカナのあいまい検索のため、ひらがなはカタカナに変換する
+			// 例：VUE.JS ユニットテストノ基本マトメ, VUE, ユニットテスト, QIITA
+			const targetAlphabetText = wanakana.toKatakana(targetText, { passRomaji: true })
 
 			// 検索ワードをスペースで区切って検索ワード配列を作成する
+			// 大文字と小文字のあいまい検索のため、アルファベットは大文字にする
 			const searchWords = searchTerm
 				.toUpperCase()
 				.replaceAll("　", " ")
 				.split(" ");
+			// ひらがなとカタカナのあいまい検索のため、ひらがなはカタカナに変換する
+			const searchAlphabetWords = searchWords.map(function(a){
+				return wanakana.toKatakana(a, { passRomaji: true })
+			});
 
 			// 検索ワード配列の個数分ループする
 			// 検索対象文字列に検索ワードが含まれていない場合、その列は表示しない
 			// 上記処理を検索ワード配列の先頭から末尾まで繰り返す
 			// 検索対象文字列に全ての検索ワードが含まれていた場合、その列は表示する
 			for (let i in searchWords) {
-				if (targetText.search(searchWords[i]) === -1) {
+				if (targetAlphabetText.search(searchAlphabetWords[i]) === -1) {
 					return false;
 				}
 			}
