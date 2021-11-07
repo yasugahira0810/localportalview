@@ -40,8 +40,8 @@ test('003-2 登録用フォームからデータを登録できること', async
     // 期待値となる実行日を取得（時刻は比較対象外のため取得していない）
     var rawDate = new Date()
     const year = rawDate.getFullYear()
-    const month = rawDate.getMonth() + 1
-    const day = rawDate.getDate()
+    const month = ("0" + (rawDate.getMonth() + 1)).slice(-2)
+    const day = ("0" + rawDate.getDate()).slice(-2)
     await expect(afterRegistrationDate).toContain(year + '/' + month + '/' + day)
 })
 

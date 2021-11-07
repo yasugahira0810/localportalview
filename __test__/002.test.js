@@ -14,7 +14,7 @@ beforeAll(async () => {
 test('002-1 vue-good-tableの最終アクセス日時が2021/08/08 00:00であること', async () => {
     // vue-good-tableの最終アクセス日時を取得（URLクリック前）
     const beforeLastAccessDate = await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td > span > div')[4].innerHTML, TARGET_ROW)
-    await expect(beforeLastAccessDate).toMatch('2021/08/08 09:00')
+    await expect(beforeLastAccessDate).toMatch('2021/08/08 00:00')
 })
 
 test('002-2 vue-good-tableの最終アクセス日時に日付が更新されていること', async () => {
@@ -27,8 +27,8 @@ test('002-2 vue-good-tableの最終アクセス日時に日付が更新されて
     // 期待値となる実行日を取得（時刻は比較対象外のため取得していない）
     var rawDate = new Date()
     const year = rawDate.getFullYear()
-    const month = rawDate.getMonth() + 1
-    const day = rawDate.getDate()
+    const month = ("0" + (rawDate.getMonth() + 1)).slice(-2)
+    const day = ("0" + rawDate.getDate()).slice(-2)
     await expect(afterLastAccessDate).toContain(year + '/' + month + '/' + day)
 })
 
