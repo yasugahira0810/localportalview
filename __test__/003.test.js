@@ -42,7 +42,7 @@ test('003-2 登録用フォームからデータを登録できること', async
     const year = rawDate.getFullYear()
     const month = rawDate.getMonth() + 1
     const day = rawDate.getDate()
-    await expect(afterRegistrationDate).toContain(month + '/' + day + '/' + year)
+    await expect(afterRegistrationDate).toContain(year + '/' + month + '/' + day)
 })
 
 test('003-3 データ登録後に「Jest」で検索してヒットすること', async () => {
