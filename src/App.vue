@@ -147,9 +147,7 @@ export default {
 				return;
 			}
 
-			this.newItemregistrationDate = new Date().toLocaleString({
-				timeZone: "Asia/Tokyo"
-			});
+			this.newItemregistrationDate = new Date().toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"});
 
 			this.items.push({
 				name: this.newItemName,
@@ -196,46 +194,46 @@ export default {
 							name: "localportal",
 							url: "https://yasugahira0810.github.io/localportal/#/",
 							tag: "ポータル, ブックマーク, Angular",
-							registrationDate: "2021/1/1 00:00:00",
-							lastAccessDate: "2021/7/20 16:42:12",
+							registrationDate: new Date("2021/1/1 00:00:00").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
+							lastAccessDate: new Date("2021/7/20 16:42:12").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
 							clickCount: 50000
 						},
 						{
 							name: "vue-good-table",
 							url: "https://xaksis.github.io/vue-good-table/",
 							tag: "Vue",
-							registrationDate: "1990/1/1 11:11:11",
-							lastAccessDate: "2021/8/8 00:00:00",
+							registrationDate: new Date("1990/1/1 11:11:11").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
+							lastAccessDate: new Date("2021/8/8 00:00:00").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
 							clickCount: 900
 						},
 						{
 							name: "基礎からわかる、Vue.jsのテスト",
 							url: "https://www.codegrid.net/series/2018-vue-testing",
 							tag: "Vue, テスト",
-							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
+							registrationDate: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Tokyo" }),
 							clickCount: 0
 						},
 						{
 							name: "Quick Bookmark",
 							url: "https://github.com/yasugahira0810/quickbookmark",
 							tag: "ポータル, ブックマーク, VUE",
-							registrationDate: "2000/4/4 00:00:00",
-							lastAccessDate: "2000/4/4 00:01:00",
+							registrationDate: new Date("2000/4/4 00:00:00").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
+							lastAccessDate: new Date("2000/4/4 00:01:00").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
 							clickCount: 100000
 						},
 						{
 							name: "Vue JS Formatter",
 							url: "https://mtp.tools/formatters/vue-formatter",
 							tag: "Vue, フォーマッター",
-							registrationDate: "2021/8/1 00:00:00",
+							registrationDate: new Date("2021/8/1 00:00:00").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
 							clickCount: 0
 						},
 						{
 							name: "Vue.js ユニットテストの基本まとめ",
 							url: "https://qiita.com/kskinaba/items/d23259060e6e13b7353c",
 							tag: "vue, ユニットテスト, Qiita",
-							registrationDate: "2020/12/31 23:59:59",
-							lastAccessDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
+							registrationDate: new Date("2020/12/31 23:59:59").toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"}),
+							lastAccessDate: new Date().toLocaleString("sv-SE", { timeZone: "Asia/Tokyo" }),
 							clickCount: 1
 						}
 					];
@@ -244,9 +242,7 @@ export default {
 			}
 		},
 		jumpToUrl(index) {
-			this.items[index].lastAccessDate = new Date().toLocaleString({
-				timeZone: "Asia/Tokyo"
-			});
+			this.items[index].lastAccessDate = new Date().toLocaleString("sv-SE", {timeZone: "Asia/Tokyo"});
 			this.items[index].clickCount++;
 			this.saveItems();
 			window.open(this.items[index].url, "_blank");
@@ -307,7 +303,7 @@ export default {
 			navigator.clipboard.writeText(text).catch(e => {
 				console.error(e);
 			});
-		}
+		},
 	}
 };
 </script>
