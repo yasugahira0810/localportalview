@@ -37,12 +37,14 @@ test('003-2 登録用フォームからデータを登録できること', async
     // vue-good-tableの登録日時を取得
     const afterRegistrationDate = await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td > span > div')[3].innerHTML, TARGET_ROW)
 
-    // 期待値となる実行日を取得（時刻は比較対象外のため取得していない）
+    // 期待値となる実行日を取得
     var rawDate = new Date()
-    const year = rawDate.getFullYear()
-    const month = rawDate.getMonth() + 1
-    const day = rawDate.getDate()
-    await expect(afterRegistrationDate).toContain(month + '/' + day + '/' + year)
+    var year = rawDate.getFullYear()
+    var month = ("0"+(rawDate.getMonth() + 1)).slice(-2)
+    var day = ("0"+rawDate.getDate()).slice(-2)
+    var hour = ("0"+rawDate.getHours()).slice(-2)
+    var minute = ("0"+rawDate.getMinutes()).slice(-2)
+    await expect(afterRegistrationDate).toContain(year + "/" + month + "/" + day + " " + hour + ":" + minute)
 })
 
 test('003-3 データ登録後に「Jest」で検索してヒットすること', async () => {

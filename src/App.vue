@@ -47,6 +47,12 @@
 							>{{ props.row.url }}</a
 						>
 					</div>
+					<div v-else-if="props.column.field == 'registrationDate'">
+						{{ props.row.registrationDate | sortableDate }}
+					</div>
+					<div v-else-if="props.column.field == 'lastAccessDate'">
+						{{ props.row.lastAccessDate | sortableDate }}
+					</div>
 					<div v-else>
 						{{ props.formattedRow[props.column.field] }}
 					</div>
@@ -127,6 +133,18 @@ export default {
 	filters: {
 		pretty: function(value) {
 			return JSON.stringify(value, null, 2);
+		},
+		sortableDate: function(value) {
+			if (!value) {
+				return '未アクセス'
+			}
+			var date = new Date(value)
+			var year = date.getFullYear()
+			var month = ("0"+(date.getMonth() + 1)).slice(-2)
+			var day = ("0"+date.getDate()).slice(-2)
+			var hour = ("0"+date.getHours()).slice(-2)
+			var minute = ("0"+date.getMinutes()).slice(-2)
+			return year + "/" + month + "/" + day + " " + hour + ":" + minute
 		}
 	},
 	mounted() {
