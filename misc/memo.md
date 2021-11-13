@@ -276,3 +276,25 @@ const tableData = await page.evaluate(() => document.querySelectorAll('#vgt-tabl
 
 1. DevツールのElementsで該当の要素をクリック
 1. 右クリック＞コピー＞Copy selectorでコピー
+
+### リリース手順
+
+- `git branch`でmainにいることを確認する
+- git tag -a v0.2.5 -m 'Fix Sort Bug'
+- タグの共有
+```
+git push origin v0.2.5
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 174 bytes | 174.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/yasugahira0810/quickbookmark.git
+ * [new tag]         v0.2.5 -> v0.2.5
+ ```
+- `npm run build`でdistに成果物ができる
+- `vim dist/index.html`
+- `:`で`%s;"/;";g`を入力して保存
+- `mv dist quickbookmark`
+- `zip -r quickbookmark.zip quickbookmark`
+- quickbookmark.zipをGitHubのリリースに貼り付ける
+- `rm quickbookmark.zip;rm -rf quickbookmark`
