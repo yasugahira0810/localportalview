@@ -1,4 +1,4 @@
-# Quick Bookmark
+# [Quick Bookmark](https://yasugahira0810.github.io/quickbookmark/)
 
 [![CI](https://github.com/yasugahira0810/quickbookmark/actions/workflows/main.yml/badge.svg)](https://github.com/yasugahira0810/quickbookmark/actions/workflows/main.yml)
 
