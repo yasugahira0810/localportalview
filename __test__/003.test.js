@@ -60,7 +60,7 @@ test('003-4 データ削除後に「Jest」で検索してヒットしないこ�
     await page.click('#vgt-table > tbody > tr > th > input[type=checkbox]')
 
     // Deleteボタンを押す
-    await page.click('body > div > div > div > div.vgt-selection-info-row.clearfix > div')
+    await page.click('#app > div > main > div > div > div > div > div > div.vgt-selection-info-row.clearfix > div > div > button')
 
     // popupにOKを押す
     const pages = await browser.pages(); // get all open pages by the browser
