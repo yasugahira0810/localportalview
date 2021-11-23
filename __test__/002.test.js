@@ -34,10 +34,19 @@ test('002-2 vue-good-tableの最終アクセス日時に日付が更新されて
     await expect(afterLastAccessDate).toContain(year + "/" + month + "/" + day + " " + hour + ":" + minute)
 })
 
-test('002-3 vue-good-tableのクリック回数が901回になっていること', async () => {
+test('002-3 vue-good-tableのURLクリック時のクリック回数が901回になっていること', async () => {
   // クリック自体は002-2で実施済み
 
   // vue-good-tableのクリック回数を取得（URLクリック後）
   const clickTimes = await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td > span > div')[5].innerHTML, TARGET_ROW)
   await expect(clickTimes).toContain('901')
+})
+
+test('002-4 vue-good-tableのクリック回数が902回になっていること', async () => {
+    // vue-good-tableのCOPYボタンをクリック
+    await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td')[1].querySelectorAll('span > div > button')[0].click(), TARGET_ROW)
+
+  // vue-good-tableのクリック回数を取得（URLクリック後）
+  const clickTimes = await page.evaluate((TARGET_ROW) => document.querySelectorAll('#vgt-table > tbody > tr')[TARGET_ROW].querySelectorAll('td > span > div')[5].innerHTML, TARGET_ROW)
+  await expect(clickTimes).toContain('902')
 })
