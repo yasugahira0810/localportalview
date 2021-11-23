@@ -38,7 +38,7 @@
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
 						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
-						<button @click="writeToClipboard(props.row.url)">COPY</button>&nbsp;
+						<button @click="writeToClipboard(props.row.originalIndex, props.row.url)">COPY</button>&nbsp;
 						<a
 							v-bind:href="props.row.url"
 							target="_blank"
@@ -321,10 +321,12 @@ export default {
 			return true;
 		},
 		// COPYボタンでURLをコピーするためのメソッド
-		writeToClipboard(text) {
+		writeToClipboard(index, text) {
 			navigator.clipboard.writeText(text).catch(e => {
 				console.error(e);
 			});
+			this.items[index].clickCount++;
+			this.saveItems();
 		}
 	}
 };
