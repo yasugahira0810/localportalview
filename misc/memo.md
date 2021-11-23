@@ -292,7 +292,8 @@ To https://github.com/yasugahira0810/quickbookmark.git
  * [new tag]         v0.2.5 -> v0.2.5
  ```
 - `npm run build`でdistに成果物ができる
-- `vim dist/index.html`
+- `mv -v dist/* docs`
+- `vim docs/index.html`
 - `:`で`%s;"/;";g`を入力して保存
 - `mv dist quickbookmark`
 - `zip -r quickbookmark.zip quickbookmark`
