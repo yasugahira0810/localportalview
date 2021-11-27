@@ -23,46 +23,35 @@
 
 			<v-spacer></v-spacer>
 
-      <v-btn icon>
+      <v-btn to="/" icon>
 				<v-icon>mdi-table</v-icon>
 			</v-btn>
 
-      <v-btn icon>
+      <v-btn to="AddLink" icon>
 				<v-icon>mdi-plus</v-icon>
 			</v-btn>
 
-      <v-btn icon>
-				<v-icon>mdi-arrow-collapse-down</v-icon>
+      <v-btn to="ShowLinks" icon>
+				<v-icon>mdi-application-braces-outline</v-icon>
 			</v-btn>
 
-			<v-btn icon>
-				<v-icon>mdi-arrow-collapse-up</v-icon>
+			<v-btn to="ImportLinks" icon>
+				<v-icon>mdi-application-import</v-icon>
 			</v-btn>
 
-			<v-btn icon>
+			<v-btn to="Initialize" icon>
+				<v-icon>mdi-alert-box</v-icon>
+			</v-btn>
+
+			<v-btn to="HowToUse" icon>
 				<v-icon>mdi-information-outline</v-icon>
 			</v-btn>
 
 		</v-app-bar>
 
-		<v-main>
-			<SearchTable />
-		</v-main>
+    <v-content>
+      <router-view />
+    </v-content>
+
 	</v-app>
 </template>
-
-<script>
-import SearchTable from "./components/SearchTable";
-
-export default {
-	name: "App",
-
-	components: {
-		SearchTable
-	},
-
-	data: () => ({
-		//
-	})
-};
-</script>

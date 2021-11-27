@@ -15,6 +15,7 @@
     "puppeteer": "^10.1.0",
     "vue": "^2.6.11",
     "vue-good-table": "^2.21.10",
+    "vue-router": "^3.5.3",
     "vuetify": "^2.4.0",
     "wanakana": "^4.0.2"
   },

@@ -1,74 +1,16 @@
 <template>
   <v-container fluid fill-height>
 	<div>
-		<h1>Quick Bookmark</h1>
-		<h2 id="search-table">検索用テーブル</h2>
-		<vue-good-table
-			@on-selected-rows-change="selectionChanged"
-			ref="my-table"
-			:select-options="{
-				enabled: true,
-				selectOnCheckboxOnly: true
-			}"
-			:columns="columns"
-			:rows="items"
-			:search-options="{
-				enabled: true,
-				searchFn: mySearchFn,
-				placeholder: '絞り込み検索'
-			}"
-			:pagination-options="{
-				enabled: true
-			}"
-			styleClass="vgt-table striped condensed bordered"
-		>
-			<div slot="selected-row-actions">
-				<button @click="removeItems()">Delete</button>
-			</div>
-			<template slot="table-row" slot-scope="props">
-				<!-- dblclickをclickにすると、編集可能領域にカーソルを持って行った瞬間通常状態に戻ってしまう -->
-				<span v-if="isEditable" v-on:dblclick="isEditable = false">
-					<div>
-						<input
-							type="text"
-							v-model="props.formattedRow[props.column.field]"
-							v-on:blur="updateItem(props)"
-						/>
-					</div>
-				</span>
-				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
-					<div v-if="props.column.field == 'url'">
-						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
-						<button @click="writeToClipboard(props.row.originalIndex, props.row.url)">COPY</button>&nbsp;
-						<a
-							v-bind:href="props.row.url"
-							target="_blank"
-							rel="noopener noreferrer"
-							v-on:click="jumpToUrl(props.row.originalIndex)"
-							>{{ props.row.url }}</a
-						>
-					</div>
-					<div v-else-if="props.column.field == 'registrationDate'">
-						{{ props.row.registrationDate | sortableDate }}
-					</div>
-					<div v-else-if="props.column.field == 'lastAccessDate'">
-						{{ props.row.lastAccessDate | sortableDate }}
-					</div>
-					<div v-else>
-						{{ props.formattedRow[props.column.field] }}
-					</div>
-				</span>
-			</template>
-		</vue-good-table>
+		<h2 id="registration-form">登録用フォーム</h2>
+		名前：<input name="newItemName" v-model="newItemName" /> URL：
+		<input name="newItemUrl" v-model="newItemUrl" /> タグ：
+		<input name="newItemTag" v-model="newItemTag" />
+		<button id="addItem" @click="addItem">Submit</button>
 	</div>
   </v-container>
 </template>
 
 <script>
-// import the styles
-import "vue-good-table/dist/vue-good-table.css";
-import { VueGoodTable } from "vue-good-table";
-import * as wanakana from 'wanakana';
 export default {
 	data() {
 		return {
@@ -111,10 +53,6 @@ export default {
 			myfunc: "",
 			selectionChanged: ""
 		};
-	},
-	// add to component
-	components: {
-		VueGoodTable
 	},
 	filters: {
 		pretty: function(value) {
@@ -266,39 +204,6 @@ export default {
 		},
 		toggleAccordion() {
 			this.isOpened = !this.isOpened;
-		},
-		mySearchFn(row, col, cellValue, searchTerm) {
-			// mySearchFnは全セルに対して処理を実行するが無駄なので、
-			// col.labelが名前のセルのみ処理して、それ以外は処理しない
-			if (col.label !== "名前") {
-				return;
-			}
-			// 名前とタグをくっつけて検索対象文字列を生成する
-			// 大文字と小文字のあいまい検索のため、アルファベットは大文字にする
-			const targetText = row.name.toUpperCase() + ", " + row.tag.toUpperCase();
-			// ひらがなとカタカナのあいまい検索のため、ひらがなはカタカナに変換する
-			// 例：VUE.JS ユニットテストノ基本マトメ, VUE, ユニットテスト, QIITA
-			const targetAlphabetText = wanakana.toKatakana(targetText, { passRomaji: true })
-			// 検索ワードをスペースで区切って検索ワード配列を作成する
-			// 大文字と小文字のあいまい検索のため、アルファベットは大文字にする
-			const searchWords = searchTerm
-				.toUpperCase()
-				.replaceAll("　", " ")
-				.split(" ");
-			// ひらがなとカタカナのあいまい検索のため、ひらがなはカタカナに変換する
-			const searchAlphabetWords = searchWords.map(function(a){
-				return wanakana.toKatakana(a, { passRomaji: true })
-			});
-			// 検索ワード配列の個数分ループする
-			// 検索対象文字列に検索ワードが含まれていない場合、その列は表示しない
-			// 上記処理を検索ワード配列の先頭から末尾まで繰り返す
-			// 検索対象文字列に全ての検索ワードが含まれていた場合、その列は表示する
-			for (let i in searchWords) {
-				if (targetAlphabetText.search(searchAlphabetWords[i]) === -1) {
-					return false;
-				}
-			}
-			return true;
 		},
 		// COPYボタンでURLをコピーするためのメソッド
 		writeToClipboard(index, text) {
