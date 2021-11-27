@@ -53,20 +53,6 @@
 				</span>
 			</template>
 		</vue-good-table>
-		<h2 id="registration-form">登録用フォーム</h2>
-		名前：<input name="newItemName" v-model="newItemName" /> URL：
-		<input name="newItemUrl" v-model="newItemUrl" /> タグ：
-		<input name="newItemTag" v-model="newItemTag" />
-		<button id="addItem" @click="addItem">Submit</button>
-		<h2 id="display-info" class="Accordion-Item" @click="toggleAccordion()">
-			登録内容表示
-		</h2>
-		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
-		<h2 id="import-json">JSONインポート用フォーム</h2>
-		<input name="itemsArray" v-model="itemsArray" />
-		<button @click="importItems">Import</button><br />
-		<h2 id="initialization-form">データ初期化用フォーム</h2>
-		<button @click="initializeItems" id="initialize">Initialize</button>
 	</div>
 </template>
 
@@ -311,9 +297,3 @@ export default {
 	}
 };
 </script>
-
-<style>
-.item {
-	color: #42b983;
-}
-</style>
