@@ -1,5 +1,4 @@
 <template>
-  <v-container fluid fill-height>
 	<div>
 		<h1>Quick Bookmark</h1>
 		<h2 id="search-table">検索用テーブル</h2>
@@ -39,7 +38,7 @@
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
 						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
-						<button @click="writeToClipboard(props.row.originalIndex, props.row.url)">COPY</button>&nbsp;
+						<button @click="writeToClipboard(props.row.url)">COPY</button>&nbsp;
 						<a
 							v-bind:href="props.row.url"
 							target="_blank"
@@ -48,20 +47,27 @@
 							>{{ props.row.url }}</a
 						>
 					</div>
-					<div v-else-if="props.column.field == 'registrationDate'">
-						{{ props.row.registrationDate | sortableDate }}
-					</div>
-					<div v-else-if="props.column.field == 'lastAccessDate'">
-						{{ props.row.lastAccessDate | sortableDate }}
-					</div>
 					<div v-else>
 						{{ props.formattedRow[props.column.field] }}
 					</div>
 				</span>
 			</template>
 		</vue-good-table>
+		<h2 id="registration-form">登録用フォーム</h2>
+		名前：<input name="newItemName" v-model="newItemName" /> URL：
+		<input name="newItemUrl" v-model="newItemUrl" /> タグ：
+		<input name="newItemTag" v-model="newItemTag" />
+		<button id="addItem" @click="addItem">Submit</button>
+		<h2 id="display-info" class="Accordion-Item" @click="toggleAccordion()">
+			登録内容表示
+		</h2>
+		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
+		<h2 id="import-json">JSONインポート用フォーム</h2>
+		<input name="itemsArray" v-model="itemsArray" />
+		<button @click="importItems">Import</button><br />
+		<h2 id="initialization-form">データ初期化用フォーム</h2>
+		<button @click="initializeItems" id="initialize">Initialize</button>
 	</div>
-  </v-container>
 </template>
 
 <script>
@@ -119,18 +125,6 @@ export default {
 	filters: {
 		pretty: function(value) {
 			return JSON.stringify(value, null, 2);
-		},
-		sortableDate: function(value) {
-			if (!value) {
-				return '未アクセス'
-			}
-			var date = new Date(value)
-			var year = date.getFullYear()
-			var month = ("0"+(date.getMonth() + 1)).slice(-2)
-			var day = ("0"+date.getDate()).slice(-2)
-			var hour = ("0"+date.getHours()).slice(-2)
-			var minute = ("0"+date.getMinutes()).slice(-2)
-			return year + "/" + month + "/" + day + " " + hour + ":" + minute
 		}
 	},
 	mounted() {
@@ -150,9 +144,7 @@ export default {
 				window.alert("各項目を記載してください");
 				return;
 			}
-			this.newItemregistrationDate = new Date().toLocaleString({
-				timeZone: "Asia/Tokyo"
-			});
+			this.newItemregistrationDate = this.formatDate(new Date());
 			this.items.push({
 				name: this.newItemName,
 				url: this.newItemUrl,
@@ -198,38 +190,38 @@ export default {
 							name: "localportal",
 							url: "https://yasugahira0810.github.io/localportal/#/",
 							tag: "ポータル, ブックマーク, Angular",
-							registrationDate: "2021/1/1 00:00:00",
-							lastAccessDate: "2021/7/20 16:42:12",
+							registrationDate: "2021/01/01 00:00:00",
+							lastAccessDate: "2021/07/20 16:42:12",
 							clickCount: 50000
 						},
 						{
 							name: "vue-good-table",
 							url: "https://xaksis.github.io/vue-good-table/",
 							tag: "Vue",
-							registrationDate: "1990/1/1 11:11:11",
-							lastAccessDate: "2021/8/8 00:00:00",
+							registrationDate: "1990/01/01 11:11:11",
+							lastAccessDate: "2021/08/08 00:00:00",
 							clickCount: 900
 						},
 						{
 							name: "基礎からわかる、Vue.jsのテスト",
 							url: "https://www.codegrid.net/series/2018-vue-testing",
 							tag: "Vue, テスト",
-							registrationDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
+							registrationDate: "2021/11/01 00:00:00",
 							clickCount: 0
 						},
 						{
 							name: "Quick Bookmark",
 							url: "https://github.com/yasugahira0810/quickbookmark",
 							tag: "ポータル, ブックマーク, VUE",
-							registrationDate: "2000/4/4 00:00:00",
-							lastAccessDate: "2000/4/4 00:01:00",
+							registrationDate: "2000/04/04 00:00:00",
+							lastAccessDate: "2000/04/04 00:01:00",
 							clickCount: 100000
 						},
 						{
 							name: "Vue JS Formatter",
 							url: "https://mtp.tools/formatters/vue-formatter",
 							tag: "Vue, フォーマッター",
-							registrationDate: "2021/8/1 00:00:00",
+							registrationDate: "2021/08/01 00:00:00",
 							clickCount: 0
 						},
 						{
@@ -237,7 +229,7 @@ export default {
 							url: "https://qiita.com/kskinaba/items/d23259060e6e13b7353c",
 							tag: "vue, ユニットテスト, Qiita",
 							registrationDate: "2020/12/31 23:59:59",
-							lastAccessDate: new Date().toLocaleString({ timeZone: "Asia/Tokyo" }),
+							lastAccessDate: this.formatDate(new Date()),
 							clickCount: 1
 						}
 					];
@@ -246,9 +238,7 @@ export default {
 			}
 		},
 		jumpToUrl(index) {
-			this.items[index].lastAccessDate = new Date().toLocaleString({
-				timeZone: "Asia/Tokyo"
-			});
+			this.items[index].lastAccessDate = this.formatDate(new Date());
 			this.items[index].clickCount++;
 			this.saveItems();
 			window.open(this.items[index].url, "_blank");
@@ -301,13 +291,29 @@ export default {
 			return true;
 		},
 		// COPYボタンでURLをコピーするためのメソッド
-		writeToClipboard(index, text) {
+		writeToClipboard(text) {
 			navigator.clipboard.writeText(text).catch(e => {
 				console.error(e);
 			});
-			this.items[index].clickCount++;
-			this.saveItems();
-		}
+		},
+		formatDate(date) {
+			var sortableLocaleDate = date.toLocaleString("sv-SE", 
+			{
+				timeZone: "Asia/Tokyo",
+				year: 'numeric',
+				month: 'numeric',
+				day: 'numeric',
+				hour: '2-digit',
+				minute: '2-digit'
+			}).replace(/-/g,"/");
+			return sortableLocaleDate;
+		},
 	}
 };
 </script>
+
+<style>
+.item {
+	color: #42b983;
+}
+</style>
