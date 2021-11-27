@@ -1,10 +1,40 @@
 <template>
 	<div>
 		<h2 id="registration-form">登録用フォーム</h2>
-		名前：<input name="newItemName" v-model="newItemName" /> URL：
-		<input name="newItemUrl" v-model="newItemUrl" /> タグ：
-		<input name="newItemTag" v-model="newItemTag" />
-		<button id="addItem" @click="addItem">Submit</button>
+		<v-form>
+			<v-container>
+				<v-row>
+					<v-col cols="12" sm="6">
+						<v-text-field
+							v-model="newItemName"
+							label="名前"
+							filled
+							name="newItemName"
+						></v-text-field>
+					</v-col>
+
+					<v-col cols="12" sm="6">
+						<v-text-field
+							v-model="newItemUrl"
+							label="URL"
+							filled
+							name="newItemUrl"
+						></v-text-field>
+					</v-col>
+
+					<v-col cols="12" sm="6">
+						<v-text-field
+							v-model="newItemTag"
+							label="URL"
+							filled
+							name="newItemTag"
+						></v-text-field>
+					</v-col>
+
+					<button id="addItem" @click="addItem">Submit</button>
+				</v-row>
+			</v-container>
+		</v-form>
 	</div>
 </template>
 
