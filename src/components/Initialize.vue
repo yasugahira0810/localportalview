@@ -1,6 +1,6 @@
 <template>
 	<div>
-    <h2 id="initialization-form">データ初期化用フォーム</h2>
+		<h2 id="initialization-form">データ初期化用フォーム</h2>
 		<button @click="initializeItems" id="initialize">Initialize</button>
 	</div>
 </template>
@@ -49,41 +49,7 @@ export default {
 			selectionChanged: ""
 		};
 	},
-    methods: {
-		addItem() {
-			// Validation. At least, URL is needed.
-			if (!this.newItemName || !this.newItemUrl || !this.newItemTag) {
-				window.alert("各項目を記載してください");
-				return;
-			}
-			this.newItemregistrationDate = this.formatDate(new Date());
-			this.items.push({
-				name: this.newItemName,
-				url: this.newItemUrl,
-				tag: this.newItemTag,
-				registrationDate: this.newItemregistrationDate,
-				clickCount: 0
-			});
-			this.newItemName = "";
-			this.newItemUrl = "";
-			this.newItemTag = "";
-			this.newItemregistrationDate = "";
-			this.saveItems();
-		},
-		removeItems() {
-			if (window.confirm("削除します。よろしいですか？")) {
-				// Without reverse(), originalIndex will slide from where user selected.
-				// This is caused by splice() used at removeItem().
-				this.$refs["my-table"].selectedRows.reverse();
-				for (let i in this.$refs["my-table"].selectedRows) {
-					this.removeItem(this.$refs["my-table"].selectedRows[i].originalIndex);
-				}
-			}
-		},
-		removeItem(index) {
-			this.items.splice(index, 1);
-			this.saveItems();
-		},
+	methods: {
 		saveItems() {
 			const parsed = JSON.stringify(this.items);
 			localStorage.setItem("items", parsed);
@@ -149,26 +115,6 @@ export default {
 				}
 			}
 		},
-		jumpToUrl(index) {
-			this.items[index].lastAccessDate = this.formatDate(new Date());
-			this.items[index].clickCount++;
-			this.saveItems();
-			window.open(this.items[index].url, "_blank");
-			// Reset global search, because usually users search another words
-			// after once jump to a link.
-			// setTimeout(this.resetGlobalSearch, 5000);
-		},
-		// resetGlobalSearch() {
-		// 	this.$refs['my-table'].globalSearchTerm = ''
-		// },
-		importItems() {
-			this.items = this.items.concat(JSON.parse(this.itemsArray));
-			this.itemsArray = "";
-			this.saveItems();
-		},
-		toggleAccordion() {
-			this.isOpened = !this.isOpened;
-		},
 		// COPYボタンでURLをコピーするためのメソッド
 		writeToClipboard(text) {
 			navigator.clipboard.writeText(text).catch(e => {
@@ -176,17 +122,18 @@ export default {
 			});
 		},
 		formatDate(date) {
-			var sortableLocaleDate = date.toLocaleString("sv-SE", 
-			{
-				timeZone: "Asia/Tokyo",
-				year: 'numeric',
-				month: 'numeric',
-				day: 'numeric',
-				hour: '2-digit',
-				minute: '2-digit'
-			}).replace(/-/g,"/");
+			var sortableLocaleDate = date
+				.toLocaleString("sv-SE", {
+					timeZone: "Asia/Tokyo",
+					year: "numeric",
+					month: "numeric",
+					day: "numeric",
+					hour: "2-digit",
+					minute: "2-digit"
+				})
+				.replace(/-/g, "/");
 			return sortableLocaleDate;
-		},
+		}
 	}
 };
 </script>

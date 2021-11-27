@@ -11,27 +11,29 @@
 					width="40"
 				/>
 
-				<v-img
-					alt="Vuetify Name"
-					class="shrink mt-1 hidden-sm-and-down"
-					contain
-					min-width="100"
-					src="../media/images/quickbookmark_title.png"
-					width="250"
-				/>
+				<router-link to="/">
+					<v-img
+						alt="Vuetify Name"
+						class="shrink mt-1 hidden-sm-and-down"
+						contain
+						min-width="100"
+						src="../media/images/quickbookmark_title.png"
+						width="250"
+					/>
+				</router-link>
 			</div>
 
 			<v-spacer></v-spacer>
 
-      <v-btn to="/" icon>
+			<v-btn to="/" icon>
 				<v-icon>mdi-table</v-icon>
 			</v-btn>
 
-      <v-btn to="AddLink" icon>
+			<v-btn to="AddLink" icon>
 				<v-icon>mdi-plus</v-icon>
 			</v-btn>
 
-      <v-btn to="ShowLinks" icon>
+			<v-btn to="ShowLinks" icon>
 				<v-icon>mdi-application-braces-outline</v-icon>
 			</v-btn>
 
@@ -46,12 +48,10 @@
 			<v-btn to="HowToUse" icon>
 				<v-icon>mdi-information-outline</v-icon>
 			</v-btn>
-
 		</v-app-bar>
 
-    <v-content>
-      <router-view />
-    </v-content>
-
+		<v-content>
+			<router-view />
+		</v-content>
 	</v-app>
 </template>
