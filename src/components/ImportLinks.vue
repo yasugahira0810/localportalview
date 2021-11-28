@@ -1,9 +1,9 @@
 <template>
-	<div>
-		<h2 id="import-json">JSONインポート用フォーム</h2>
+	<v-container>
+		<v-card-title class="font-weight-bold" id="import-json">JSONインポート用フォーム</v-card-title>
 		<input name="itemsArray" v-model="itemsArray" />
 		<button @click="importItems">Import</button><br />
-	</div>
+	</v-container>
 </template>
 
 <script>
