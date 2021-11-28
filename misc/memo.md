@@ -295,7 +295,7 @@ To https://github.com/yasugahira0810/quickbookmark.git
 - `mv -v dist/* docs`
 - `vim docs/index.html`
 - `:`で`%s;"/;";g`を入力して保存
-- `cp docs quickbookmark`
+- `cp -rp docs quickbookmark`
 - `zip -r quickbookmark.zip quickbookmark`
 - quickbookmark.zipをGitHubのリリースに貼り付ける
 - `rm quickbookmark.zip;rm -rf quickbookmark`
