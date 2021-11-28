@@ -1,7 +1,11 @@
 <template>
 	<v-container>
 		<v-card-title class="font-weight-bold" id="initialization-form">データ初期化用フォーム</v-card-title>
-		<button @click="initializeItems" id="initialize">Initialize</button>
+		<v-row>
+		<v-col cols="12" sm="2">
+					<v-btn depressed color="error" id="initialize" @click="initializeItems">初期化</v-btn>
+		</v-col>
+		</v-row>
 	</v-container>
 </template>
 

@@ -1,8 +1,18 @@
 <template>
 	<v-container>
 		<v-card-title class="font-weight-bold" id="import-json">JSONインポート用フォーム</v-card-title>
-		<input name="itemsArray" v-model="itemsArray" />
-		<button @click="importItems">Import</button><br />
+		<v-row>
+		<v-col cols="12" sm="8">
+		<v-text-field
+						v-model="itemsArray"
+						label="名前"
+						name="itemsArray"
+					></v-text-field>
+		</v-col>
+		<v-col cols="12" sm="2">
+					<v-btn depressed color="primary" id="addItem" @click="importItems">登録</v-btn>
+		</v-col>
+		</v-row>
 	</v-container>
 </template>
 
