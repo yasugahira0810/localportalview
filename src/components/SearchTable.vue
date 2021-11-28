@@ -36,8 +36,6 @@
 				</span>
 				<span v-if="!isEditable" v-on:dblclick="isEditable = true">
 					<div v-if="props.column.field == 'url'">
-						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
-						<button @click="writeToClipboard(props.row.url)">COPY</button>&nbsp;
 						<a
 							v-bind:href="props.row.url"
 							target="_blank"
@@ -45,6 +43,11 @@
 							v-on:click="jumpToUrl(props.row.originalIndex)"
 							>{{ props.row.url }}</a
 						>
+						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
+						<v-btn @click="writeToClipboard(props.row.url)" icon>
+							<v-icon>mdi-checkbox-multiple-blank-outline</v-icon>
+						</v-btn>
+
 					</div>
 					<div v-else>
 						{{ props.formattedRow[props.column.field] }}
