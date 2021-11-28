@@ -44,7 +44,7 @@
 							>{{ props.row.url }}</a
 						>
 						<!-- URLにジャンプするのではなくコピーするユースケースもあるためCOPYボタンを配置 -->
-						<v-btn @click="writeToClipboard(props.row.url)" icon>
+						<v-btn @click="writeToClipboard(props.row.originalIndex, props.row.url)" icon>
 							<v-icon>mdi-checkbox-multiple-blank-outline</v-icon>
 						</v-btn>
 
@@ -84,11 +84,11 @@ export default {
 					field: "registrationDate"
 				},
 				{
-					label: "最終アクセス日時",
+					label: "最終利用日時",
 					field: "lastAccessDate"
 				},
 				{
-					label: "クリック回数",
+					label: "利用回数",
 					field: "clickCount",
 					type: "number"
 				}
@@ -188,10 +188,13 @@ export default {
 			return true;
 		},
 		// COPYボタンでURLをコピーするためのメソッド
-		writeToClipboard(text) {
+		writeToClipboard(index, text) {
 			navigator.clipboard.writeText(text).catch(e => {
 				console.error(e);
 			});
+			this.items[index].lastAccessDate = this.formatDate(new Date());
+			this.items[index].clickCount++;
+			this.saveItems();
 		},
 		formatDate(date) {
 			var sortableLocaleDate = date.toLocaleString("sv-SE", 
