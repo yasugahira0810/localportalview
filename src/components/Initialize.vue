@@ -1,8 +1,8 @@
 <template>
-	<div>
-		<h2 id="initialization-form">データ初期化用フォーム</h2>
+	<v-container>
+		<v-card-title class="font-weight-bold" id="initialization-form">データ初期化用フォーム</v-card-title>
 		<button @click="initializeItems" id="initialize">Initialize</button>
-	</div>
+	</v-container>
 </template>
 
 <script>

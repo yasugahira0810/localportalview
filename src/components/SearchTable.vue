@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<h2 id="search-table">検索用テーブル</h2>
+	<v-container>
+		<v-card-title class="font-weight-bold" id="search-table">検索用テーブル</v-card-title>
 		<vue-good-table
 			@on-selected-rows-change="selectionChanged"
 			ref="my-table"
@@ -52,7 +52,7 @@
 				</span>
 			</template>
 		</vue-good-table>
-	</div>
+	</v-container>
 </template>
 
 <script>
