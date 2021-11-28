@@ -293,9 +293,5 @@ To https://github.com/yasugahira0810/quickbookmark.git
  ```
 - `npm run build`でdistに成果物ができる
 - `mv -v dist/* docs`
-- `vim docs/index.html`
-- `:`で`%s;"/;";g`を入力して保存
-- `cp -rp docs quickbookmark`
-- `zip -r quickbookmark.zip quickbookmark`
+- `zip -r quickbookmark.zip docs`
 - quickbookmark.zipをGitHubのリリースに貼り付ける
-- `rm quickbookmark.zip;rm -rf quickbookmark`
