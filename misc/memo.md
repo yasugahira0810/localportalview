@@ -293,5 +293,6 @@ To https://github.com/yasugahira0810/quickbookmark.git
  ```
 - `npm run build`でdistに成果物ができる
 - `cp -rp dist/* docs`
-- `zip -r quickbookmark.zip docs`
+- `cp -rp docs/* quickbookmark`
+- `zip -r quickbookmark.zip quickbookmark/*`
 - quickbookmark.zipをGitHubのリリースに貼り付ける
