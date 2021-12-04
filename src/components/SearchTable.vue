@@ -1,6 +1,12 @@
 <template>
 	<v-container>
 		<v-card-title class="font-weight-bold" id="search-table">検索用テーブル</v-card-title>
+		<v-alert v-if="isEditable"
+      dense
+      type="warning"
+    >
+		登録内容を編集できます。編集後、テキストフィールド外をクリックしてください。
+    </v-alert>
 		<vue-good-table
 			@on-selected-rows-change="selectionChanged"
 			ref="my-table"
@@ -27,8 +33,7 @@
 				<!-- dblclickをclickにすると、編集可能領域にカーソルを持って行った瞬間通常状態に戻ってしまう -->
 				<span v-if="isEditable" v-on:dblclick="isEditable = false">
 					<div>
-						<input
-							type="text"
+						<v-text-field
 							v-model="props.formattedRow[props.column.field]"
 							v-on:blur="updateItem(props)"
 						/>
