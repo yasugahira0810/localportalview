@@ -1,13 +1,14 @@
 <template>
 	<v-container>
 		<v-card-title class="font-weight-bold" id="registration-form">登録用フォーム</v-card-title>
-		<v-form>
+		<v-form ref="addLinkForm">
 			<v-row>
 				<v-col cols="12" sm="2">
 					<v-text-field
 						v-model="newItemName"
 						label="名前"
 						name="newItemName"
+						:rules="[required]"
 					></v-text-field>
 				</v-col>
 
@@ -16,6 +17,7 @@
 						v-model="newItemUrl"
 						label="URL"
 						name="newItemUrl"
+						:rules="[required]"
 					></v-text-field>
 				</v-col>
 
@@ -24,6 +26,7 @@
 						v-model="newItemTag"
 						label="タグ"
 						name="newItemTag"
+						:rules="[required]"
 					></v-text-field>
 				</v-col>
 
@@ -76,7 +79,8 @@ export default {
 			itemsArray: [],
 			isOpened: false,
 			myfunc: "",
-			selectionChanged: ""
+			selectionChanged: "",
+			required: value => !!value || "必ず入力してください", // 入力必須の制約
 		};
 	},
 	mounted() {
@@ -91,19 +95,22 @@ export default {
 	},
 	methods: {
 		addItem() {
-			this.newItemregistrationDate = this.formatDate(new Date());
-			this.items.push({
-				name: this.newItemName,
-				url: this.newItemUrl,
-				tag: this.newItemTag,
-				registrationDate: this.newItemregistrationDate,
-				clickCount: 0
-			});
-			this.newItemName = "";
-			this.newItemUrl = "";
-			this.newItemTag = "";
-			this.newItemregistrationDate = "";
-			this.saveItems();
+			if (this.$refs.addLinkForm.validate()) {
+				this.newItemregistrationDate = this.formatDate(new Date());
+				this.items.push({
+					name: this.newItemName,
+					url: this.newItemUrl,
+					tag: this.newItemTag,
+					registrationDate: this.newItemregistrationDate,
+					clickCount: 0
+				});
+				this.newItemName = "";
+				this.newItemUrl = "";
+				this.newItemTag = "";
+				this.newItemregistrationDate = "";
+				this.saveItems();
+				this.$refs.addLinkForm.reset();
+			}
 		},
 		saveItems() {
 			const parsed = JSON.stringify(this.items);
