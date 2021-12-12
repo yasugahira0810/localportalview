@@ -1,5 +1,5 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="how-to-use">使い方</v-card-title>
+		<p class="text-h4 font-weight-black" id="how-to-use">使い方</p>
 	</v-container>
 </template>

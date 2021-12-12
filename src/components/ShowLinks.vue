@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="show-links">登録内容表示</v-card-title>
+		<p class="text-h4 font-weight-black" id="show-links">登録内容表示</p>
 		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
 	</v-container>
 </template>

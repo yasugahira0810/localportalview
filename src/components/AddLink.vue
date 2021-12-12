@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="registration-form">登録用フォーム</v-card-title>
+		<p class="text-h4 font-weight-black" id="registration-form">登録用フォーム</p>
 		<v-form ref="addLinkForm">
 			<v-row>
 				<v-col cols="12" sm="2">

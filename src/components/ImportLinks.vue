@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="import-json">JSONインポート用フォーム</v-card-title>
+		<p class="text-h4 font-weight-black" id="import-json">JSONインポート用フォーム</p>
 		<v-row>
 		<v-col cols="12" sm="8">
 		<v-text-field
