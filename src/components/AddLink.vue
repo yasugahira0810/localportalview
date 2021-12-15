@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<p class="text-h4 font-weight-black" id="registration-form">登録用フォーム</p>
+		<p class="text-h4 font-weight-black" id="registration-form">ブックマーク登録</p>
 		<v-form ref="addLinkForm">
 			<v-row>
 				<v-col cols="12" sm="2">

@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<p class="text-h4 font-weight-black" id="initialization-form">データ初期化用フォーム</p>
+		<p class="text-h4 font-weight-black" id="initialization-form">ブックマーク初期化</p>
 		<v-row>
 		<v-col cols="12" sm="2">
 					<v-btn depressed color="error" id="initialize" @click="initializeItems">初期化</v-btn>

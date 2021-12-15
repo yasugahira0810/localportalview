@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<p class="text-h4 font-weight-black" id="search-table">検索用テーブル</p>
+		<p class="text-h4 font-weight-black" id="search-table">ブックマーク検索</p>
 		<v-alert v-if="isEditable"
       dense
       type="warning"
