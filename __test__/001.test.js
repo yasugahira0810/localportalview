@@ -7,7 +7,7 @@ beforeAll(async () => {
 })
 
 test('001-1 初期表示できること（データ初期化前）', async () => {
-  await expect(page).toMatch('検索用テーブル')
+  await expect(page).toMatch('ブックマーク絞り込み検索')
 })
 
 // test('001-2 初期表示できること（データ初期化後）', async () => {

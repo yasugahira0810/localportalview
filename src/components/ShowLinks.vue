@@ -1,7 +1,7 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="show-links">登録内容表示</v-card-title>
-		<pre class="Accordion-Item" v-if="isOpened"> {{ items | pretty }}</pre>
+		<p class="text-h4 font-weight-black" id="show-links">ブックマーク内容表示</p>
+		<pre> {{ items | pretty }}</pre>
 	</v-container>
 </template>
 
@@ -55,32 +55,7 @@ export default {
 		}
 	},
 	mounted() {
-		if (localStorage.getItem("items")) {
-			try {
-				this.items = JSON.parse(localStorage.getItem("items"));
-				console.log(this.items);
-			} catch (e) {
-				localStorage.removeItem("items");
-			}
-		}
-	},
-	methods: {
-		saveItems() {
-			const parsed = JSON.stringify(this.items);
-			localStorage.setItem("items", parsed);
-		},
-		updateItem(editItem) {
-			this.items.splice(editItem.row.originalIndex, 1, editItem.formattedRow);
-			this.saveItems();
-			// 編集後、領域外をクリックすると通常状態に戻る
-			this.isEditable = false;
-		},
-		// COPYボタンでURLをコピーするためのメソッド
-		writeToClipboard(text) {
-			navigator.clipboard.writeText(text).catch(e => {
-				console.error(e);
-			});
-		}
+		this.items = JSON.parse(localStorage.getItem("items"));
 	}
 };
 </script>

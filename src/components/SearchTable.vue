@@ -1,6 +1,6 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="search-table">検索用テーブル</v-card-title>
+		<p class="text-h4 font-weight-black" id="search-table">ブックマーク絞り込み検索</p>
 		<v-alert v-if="isEditable"
       dense
       type="warning"

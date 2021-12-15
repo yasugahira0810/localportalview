@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import SearchTable from "../components/SearchTable";
-import HelloWorld from "../components/HelloWorld";
 import AddLink from "../components/AddLink";
 import ShowLinks from "../components/ShowLinks";
 import ImportLinks from "../components/ImportLinks";
@@ -17,11 +16,6 @@ export default new Router({
       path: '/',
       name: 'SearchTable',
       component: SearchTable
-    },
-    {
-      path: '/helloworld',
-      name: 'HelloWorld',
-      component: HelloWorld
     },
     {
       path: '/AddLink',

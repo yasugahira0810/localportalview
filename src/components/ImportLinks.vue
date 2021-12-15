@@ -1,11 +1,11 @@
 <template>
 	<v-container>
-		<v-card-title class="font-weight-bold" id="import-json">JSONインポート用フォーム</v-card-title>
+		<p class="text-h4 font-weight-black" id="import-json">ブックマーク一括登録</p>
 		<v-row>
 		<v-col cols="12" sm="8">
 		<v-text-field
 						v-model="itemsArray"
-						label="名前"
+						label="一括登録するブックマーク"
 						name="itemsArray"
 					></v-text-field>
 		</v-col>
