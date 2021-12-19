@@ -6,7 +6,7 @@
 		検索対象は「名前」と「タグ」です。登録時とひらがな・カタカナが異なっていても、検索結果には表示されます。<br>
 		またテーブルをダブルクリックすることで、登録内容を更新できます。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク登録</p>
-		<p class="font-weight-medium">ユーザはブックマークを登録できます。Quick Bookmarkは登録内容をlocalStorageに保存します。</p>
+		<p class="font-weight-medium">ユーザはブックマークを登録できます。Quick Bookmarkは登録内容をlocaltorageに保存します。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク内容表示</p>
 		<p class="font-weight-medium">ユーザはブックマークの内容を確認できます。ユーザは表示内容をファイルに保存しておくことで、ブックマークをバックアップできます。<br>バックアップした内容は、ブックマーク一括登録から再登録できます。Quick Bookmarkはブックマークの内容をJSON形式で表示します。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク一括登録</p>
