@@ -292,8 +292,8 @@ To https://github.com/yasugahira0810/quickbookmark.git
  * [new tag]         v0.2.5 -> v0.2.5
  ```
 - `npm run build`でdistに成果物ができる
-- `cp -rp dist/* docs`
 - `rm -rf docs/*`
+- `cp -rp dist/* docs`
 - `cp -rp docs/* quickbookmark`
 - `zip -r quickbookmark.zip quickbookmark/*`
 - quickbookmark.zipをGitHubのリリースに貼り付ける

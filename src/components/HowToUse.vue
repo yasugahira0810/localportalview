@@ -33,5 +33,35 @@
 		</pre>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク初期化</p>
 		<p class="font-weight-medium">ユーザはブックマークを初期化できます。Quick Bookmarkはそれまでの登録内容を全て破棄します。</p>
+		<p class="text-h4 font-weight-black" id="how-to-use">デモ</p>
+<v-expansion-panels>
+    <v-expansion-panel
+      v-for="list in lists"
+      :key="list.id"
+    >
+      <v-expansion-panel-header>
+        {{ list.title }}
+      </v-expansion-panel-header>
+      <v-expansion-panel-content>
+				{{ list.text }}
+				<v-img :src="require(`@/assets/${list.movie}.gif`)"></v-img>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
+  </v-expansion-panels>
 	</v-container>
 </template>
+
+<script>
+export default {
+	data() {
+		return {
+			lists: [
+          {id: 1, title: 'デモ① ブックマーク検索', movie: 'demo01_search', text: 'ブックマークを検索して遷移するデモです。ここでは2つの遷移の仕方をデモしています。1つめはブラウザ上でGitHubのQuick Bookmarkのリポジトリに遷移しています。2つめはブックマークをコピーして、Terminalのopenコマンドで端末のフォルダを開いています。'},
+          {id: 2, title: 'デモ② ブックマーク更新', movie: 'demo02_update'},
+          {id: 3, title: 'デモ③ ブックマーク登録', movie: 'demo03_regist'},
+          {id: 4, title: 'デモ④ ブックマーク登録', movie: 'demo04_restore'},
+        ]
+		}
+	}
+};
+</script>
