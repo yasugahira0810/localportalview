@@ -6,7 +6,7 @@
 		検索対象は「名前」と「タグ」です。登録時とひらがな・カタカナが異なっていても、検索結果には表示されます。<br>
 		またテーブルをダブルクリックすることで、登録内容を更新できます。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク登録</p>
-		<p class="font-weight-medium">ユーザはブックマークを登録できます。Quick Bookmarkは登録内容をlocal storageに保存します。</p>
+		<p class="font-weight-medium">ユーザはブックマークを登録できます。Quick Bookmarkは登録内容をlocalStorageに保存します。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク内容表示</p>
 		<p class="font-weight-medium">ユーザはブックマークの内容を確認できます。ユーザは表示内容をファイルに保存しておくことで、ブックマークをバックアップできます。<br>バックアップした内容は、ブックマーク一括登録から再登録できます。Quick Bookmarkはブックマークの内容をJSON形式で表示します。</p>
 		<p class="text-h5 font-weight-black" id="how-to-use">ブックマーク一括登録</p>
@@ -43,8 +43,10 @@
         {{ list.title }}
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-				{{ list.text }}
+				<p v-html="list.text"></p>
+				<v-col cols="8">
 				<v-img :src="require(`@/assets/${list.movie}.gif`)"></v-img>
+				</v-col>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>
@@ -56,10 +58,10 @@ export default {
 	data() {
 		return {
 			lists: [
-          {id: 1, title: 'デモ① ブックマーク検索', movie: 'demo01_search', text: 'ブックマークを検索して遷移するデモです。ここでは2つの遷移の仕方をデモしています。1つめはブラウザ上でGitHubのQuick Bookmarkのリポジトリに遷移しています。2つめはブックマークをコピーして、Terminalのopenコマンドで端末のフォルダを開いています。'},
-          {id: 2, title: 'デモ② ブックマーク更新', movie: 'demo02_update'},
-          {id: 3, title: 'デモ③ ブックマーク登録', movie: 'demo03_regist'},
-          {id: 4, title: 'デモ④ ブックマーク登録', movie: 'demo04_restore'},
+          {id: 1, title: 'デモ① ブックマークを検索する', movie: 'demo01_search', text: 'ここでは2つの遷移の仕方をデモしています。<br>1つめはブラウザ上でGitHubのQuick Bookmarkのリポジトリに遷移しています。<br>2つめはブックマークをコピーして、Terminalのopenコマンドで端末のフォルダを開いています。'},
+          {id: 2, title: 'デモ② ブックマークを更新する', movie: 'demo02_update', text: 'ここでは登録済みのブックマークを更新する2つのユースケースをデモしています。<br>1つめは、アドベントカレンダーを「advent」とアルファベットで検索したところ、<br>ヒットしなかったので、今後のためにタグに「advent」を追加するデモです。<br>2つめは、2020年のアドベントカレンダーのURLを登録していたところ、<br>1年経って2021年のアドベントカレンダーのURLができたので、登録済みのURLを更新するデモです。'},
+          {id: 3, title: 'デモ③ ブックマークを登録する', movie: 'demo03_regist', text: 'ここではタグに「yasugahira0810」という人名を設定して「Vue advent calendar」をブックマーク登録しています。<br>このように、ブックマーク登録時にそのURLやパスを登録するきっかけとなった人名をタグに設定しておくと、<br>登録名を忘れてもきっかけとなった人名で検索がヒットするので、検索しやすくておすすめです。'},
+          {id: 4, title: 'デモ④ ブックマークをバックアップしておいて復旧する', movie: 'demo04_restore', text: 'ここでは「ブックマーク内容表示」と「ブックマーク一括登録」を使って、ブックマークを復旧するデモをしています。<br>まず「ブックマーク内容表示」でブックマークをコピーします。<br>（ここではコピーしたなので、本格的にバックアップを取る場合、コピーした内容をファイルに保存しておいてください。）<br>その後、登録済みのブックマークを全削除してから、「ブックマーク一括登録」にコピーしておいたブックマーク情報を<br>ペーストして「登録」ボタンを押すことで、ブックマークを復旧しています。'},
         ]
 		}
 	}
