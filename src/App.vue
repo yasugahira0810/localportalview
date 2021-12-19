@@ -7,7 +7,7 @@
 						alt="Vuetify Logo"
 						class="shrink mr-2"
 						contain
-						src="../media/images/quickbookmark_logo.png"
+						src="@/assets/quickbookmark_logo.png"
 						transition="scale-transition"
 						width="40"
 					/>
@@ -19,7 +19,7 @@
 						class="shrink mt-1 hidden-sm-and-down"
 						contain
 						min-width="100"
-						src="../media/images/quickbookmark_title.png"
+						src="@/assets/quickbookmark_title.png"
 						width="250"
 					/>
 				</router-link>
