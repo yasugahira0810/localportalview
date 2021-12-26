@@ -1,10 +1,10 @@
 module.exports = {
   launch: {
     dumpio: true,
-    headless: false
+    headless: true
   },
   server: {
-    command: 'BROWSER=none npm run serve',
+    command: 'HEADLESS=false npm run serve',
     port: 8080,
   },
 };
