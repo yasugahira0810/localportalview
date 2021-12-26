@@ -13,5 +13,6 @@
 ```
 npm install // インストール
 npm run serve // 起動
-npm test // テスト
+npm test // テスト（ブラウザ表示なし）
+HEADLESS='false' npm test // テスト（ブラウザ表示あり）
 ```
